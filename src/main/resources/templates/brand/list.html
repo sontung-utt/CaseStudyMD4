@@ -65,7 +65,7 @@
                     <div class="select-input">
                         <h4>Chọn thương hiệu</h4>
                         <form th:action="@{/brands/list}" method="get">
-                            <input type="hidden" name="action" value="brand">
+<!--                            <input type="hidden" name="action" value="brand">-->
                             <select name="idBrand" id="idBrand" onchange="this.form.submit()">
                                 <option th:each="brand : ${brandList}"
                                         th:value="${brand.id}"

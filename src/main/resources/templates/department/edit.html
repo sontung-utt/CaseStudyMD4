@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/addDepartment.css}"/>
+    <link rel="stylesheet" th:href="@{/css/header-form.css}">
+    <script src="https://kit.fontawesome.com/bd7b2915a7.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Sửa thông tin phòng ban</title>
+</head>
+<body>
+<div class="container">
+    <div th:include="~{/fragments/headerForm :: headerForm}"></div>
+
+    <div class="form">
+        <div th:if="${errorMessage != null}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+        </div>
+        <form th:action="@{/departments/edit}" th:object="${department}" method="post">
+            <table border="1">
+                <tr>
+                    <th colspan="2">SỬA THÔNG TIN PHÒNG BAN</th>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <i class="fa-solid fa-list-ol"></i>
+                        <label for="id">Mã phòng ban</label>
+                    </td>
+                    <td><input type="text" name="id" id="id" readonly th:field="*{id}"></td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <label for="name">Tên phòng ban</label>
+                    </td>
+                    <td><input type="text" name="name" id="name" th:field="*{name}"></td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <i class="fa-solid fa-hashtag"></i>
+                        <label for="salaryCoefficient">Hệ số lương</label>
+                    </td>
+                    <td><input type="number" name="salaryCoefficient" id="salaryCoefficient" th:field="*{salaryCoefficient}" step="0.01" min="0.1">
+                </tr>
+                <tr>
+                    <td th:colspan="2" class="tdbtn">
+                        <button type="submit">Sửa thông tin</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>

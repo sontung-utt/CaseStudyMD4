@@ -104,4 +104,10 @@ public class BrandCategoryController {
         iBrandCategoryService.save(brandCategory);
         return "redirect:/brand_category/list";
     }
+
+    @GetMapping("/delete")
+    public String deleteBrandCategory(@RequestParam Long id){
+        iBrandCategoryService.delete(id);
+        return "redirect:/brand_category/list";
+    }
 }

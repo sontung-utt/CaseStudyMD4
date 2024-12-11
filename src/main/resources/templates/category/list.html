@@ -65,7 +65,7 @@
                     <div class="select-input">
                         <h4>Chọn loại sản phẩm</h4>
                         <form th:action="@{/categories/list}" method="get">
-                            <input type="hidden" name="action" value="category">
+<!--                            <input type="hidden" name="action" value="category">-->
                             <select name="idCategory" id="idCategory" onchange="this.form.submit()">
                                 <option th:each="item : ${categoryList}"
                                             th:value="${item.id}"

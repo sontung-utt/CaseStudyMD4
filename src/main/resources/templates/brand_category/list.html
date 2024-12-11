@@ -42,7 +42,6 @@
                             <th>Tên loại sản phẩm</th>
                             <th>Hành động</th>
                         </tr>
-                        <!-- Duyệt qua danh sách bằng Thymeleaf -->
                         <tr th:each="item, loopStat : ${list}">
                             <td th:text="${loopStat.index + 1}"></td>
                             <td th:text="${item.id}"></td>

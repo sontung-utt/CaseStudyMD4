@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/addDepartment.css}"/>
+    <link rel="stylesheet" th:href="@{/css/header-form.css}">
+    <script src="https://kit.fontawesome.com/bd7b2915a7.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Thêm phòng ban</title>
+</head>
+<body>
+<div class="container">
+    <div th:include="~{/fragments/headerForm :: headerForm}"></div>
+    <div class="form">
+        <div th:if="${errorMessage != null}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+        </div>
+        <form th:action="@{/departments/add}" th:object="${department}" method="post">
+            <table border="1">
+                <tr>
+                    <th colspan="2">THÊM MỚI PHÒNG BAN</th>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <i class="fa-solid fa-gamepad"></i>
+                        <label for="name">Tên phòng ban</label>
+                    </td>
+                    <td><input type="text" name="name" id="name" th:field="*{name}">
+                        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <i class="fa-solid fa-gamepad"></i>
+                        <label for="salaryCoefficient">Hệ số lương</label>
+                    </td>
+                    <td><input type="number" name="salaryCoefficient" id="salaryCoefficient" th:field="*{salaryCoefficient}" step="0.01" min="0.1">
+                        <span th:if="${#fields.hasErrors('salaryCoefficient')}" th:errors="*{salaryCoefficient}"></span></td>
+                </tr>
+                <tr>
+                    <td th:colspan="2" class="tdbtn">
+                        <button type="submit">Thêm phòng ban</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>
