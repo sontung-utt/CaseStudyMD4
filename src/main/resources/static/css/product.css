@@ -1,0 +1,303 @@
+/*index*/
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+/*left-frame*/
+.container {
+    display: flex;
+}
+.left-main {
+    height: 725px;
+    width: 275px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position:fixed;
+}
+
+.left-main .logo {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    background-color: rgb(220, 20, 49);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logo .logo-img {
+    width: 70%;
+    height: 100%;
+}
+
+.logo .logo-img img {
+    width: 100%;
+    height: 100%;
+    padding-left: 20px;
+}
+
+.logo .user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    height: 100%;
+    color: white;
+    row-gap: 8px;
+}
+
+.left-main p {
+    font-size: 13px;
+}
+
+.left-main .manage {
+    width: 100%;
+    height: 665px;
+    display: flex;
+}
+
+.manage .icon {
+    width: 22%;
+    height: 100%;
+    background-color: rgb(220, 20, 49);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.icon .item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+}
+
+.icon .item:hover{
+    background-color: rgb(120, 13, 29);
+}
+
+.manage .info {
+    background-color: rgb(218, 98, 98);
+    width: 78%;
+    height: 100%;
+}
+
+.info .name {
+    width: 100%;
+    height: 55px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+}
+
+.name .type-name {
+    width: 75%;
+    height: 100%;
+}
+
+.name .icon-name {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+}
+
+.name .icon-name i {
+    cursor: pointer;
+}
+
+.info .list .list-item {
+    width: 100%;
+    height: 45px;
+    cursor: pointer;
+}
+
+.info .list .list-item:hover {
+    background-color: rgb(211, 76, 76);
+}
+
+/*manage*/
+.container {
+    display: flex;
+    position: relative;
+}
+
+.main-info {
+    width: calc(100% - 275px);
+    height: 660px;
+    margin-left: 275px;
+}
+
+.main-info .info-product {
+    width: 100%;
+    height: 100%;
+    margin-top: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+th {
+    font-size: 16px;
+}
+
+td {
+    font-size: 16px;
+}
+
+th, td {
+    padding: 4px;
+    text-align: center;
+}
+
+table .btn {
+    padding: 5px;
+    border-radius: 4px;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border: none;
+    width: 35px;
+}
+
+.btn-remove {
+    background-color: rgba(246, 4, 4, 0.912);
+    border: 2px solid rgba(239, 83, 83, 0.912);
+    margin-left: 5px;
+}
+
+.btn-remove:hover {
+    background-color: darkred;
+}
+
+.btn-edit {
+    background-color: gold;
+    border: 2px solid rgb(239, 218, 98);
+    margin-right: 5px;
+}
+
+.btn-edit:hover {
+    background-color: rgb(136, 136, 36);
+}
+
+img {
+    width: 140px;
+    height: 150px;
+}
+
+.small {
+    width: 60px;
+}
+
+.medium {
+    width: 150px;
+}
+
+.large {
+    width: 300px;
+}
+
+th {
+    background-color: rgb(230, 230, 230);
+}
+
+.info-product tr:nth-child(even) {
+    background-color: rgb(246, 155, 155);
+}
+
+.info-product tr:nth-child(odd) {
+    background-color: rgb(228, 100, 100);
+}
+
+.info-product i {
+    font-size: 18px;
+}
+
+.info-product table button {
+    cursor: pointer;
+}
+
+/*search*/
+.search {
+    background-color: white;
+    position: relative;
+    width: 100%;
+    height: 50px;
+    z-index: 1;
+    margin-top: 65px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.search-input {
+    width: 20%;
+    height: 80%;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+}
+
+.search .icon {
+    margin-left: 10px;
+    color: gray;
+    margin-right: 5px;
+}
+
+.search .input {
+    width: 90%;
+}
+
+.search .input input {
+    width: 100%;
+    height: 30px;
+    outline: none;
+    font-size: 15px;
+    border: none;
+}
+
+.search form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search .add-button {
+    background-color: #4ab84a;
+    width: 120px;
+    height: 40px;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.search .add-button:hover {
+    background-color: green;
+}
+
+.add-button a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+}
+
+.add-button p {
+    margin-left: 5px;
+}
+
+.search .sort-area {
+    width: 65%;
+    height: 100%;
+    border: 1px solid black;
+}

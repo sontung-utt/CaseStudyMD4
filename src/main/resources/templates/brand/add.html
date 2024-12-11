@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/addForm.css}">
+    <link rel="stylesheet" th:href="@{/css/header-form.css}">
+    <script src="https://kit.fontawesome.com/bd7b2915a7.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+<div class="container">
+    <div th:include="~{/fragments/headerForm :: headerForm}"></div>
+
+    <div class="form">
+        <!-- Hiển thị thông báo lỗi nếu có -->
+        <div class="error-message" th:if="${errorMessage != null}">
+            <p th:text="${errorMessage}"></p>
+        </div>
+
+        <!-- Form thêm thương hiệu -->
+        <form th:action="@{/brands/add}" th:object="${brandForm}" method="post"
+              novalidate="novalidate" enctype="multipart/form-data">
+            <table border="1">
+                <tr>
+                    <th colspan="2">THÊM MỚI THƯƠNG HIỆU</th>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <i class="fa-solid fa-gamepad"></i>
+                        <label for="name">Tên thương hiệu</label>
+                    </td>
+                    <td><input type="text" name="name" id="name" th:field="*{name}" required>
+                    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <i class="fa-regular fa-image"></i>
+                        <label for="image">Hình ảnh</label>
+                    </td>
+                    <td><input type="file" name="image" id="image" th:field="*{image}"></td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="tdbtn">
+                        <button type="submit">Thêm thương hiệu</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>

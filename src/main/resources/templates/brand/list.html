@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/bd7b2915a7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/topFrame.css}">
+    <link rel="stylesheet" th:href="@{/css/leftFrame.css}">
+    <link rel="stylesheet" th:href="@{/css/brand.css}">
+    <title>Danh sách thương hiệu</title>
+</head>
+<body>
+
+<div class="container">
+    <div th:include="~{/fragments/leftFrame :: leftFrame}"></div>
+    <div class="main-info">
+        <div th:include="~{/fragments/topFrame :: topFrame}"></div>
+        <div class="info">
+
+            <div class="form-brand">
+                <div class="search">
+                    <div class="add-button">
+                        <a href="http://localhost:8080/brands/add">
+                            <i class="fa-solid fa-plus"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="list-brand">
+                    <table border="1">
+                        <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã thương hiệu</th>
+                            <th>Tên thương hiệu</th>
+                            <th>Hình ảnh</th>
+                            <th>Hành động</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <div th:if="${errorMessage != null}" class="error-message">
+                            <p th:text="${errorMessage}"></p>
+                        </div>
+                        <tr th:each="brand, status : ${brandList}">
+                            <td th:text="${status.index + 1}"></td>
+                            <td th:text="${brand.id}"></td>
+                            <td th:text="${brand.name}"></td>
+                            <td><img th:src="@{'/images/' + ${brand.image}}" alt="" src=""/></td>
+                            <td>
+                                <a th:href="@{/brands/edit(id=${brand.id})}"><button class="btn btn-edit"><i class="fa-solid fa-pen-to-square"></i></button></a>
+                                <a th:href="@{/brands/delete(id=${brand.id})}" onclick="return confirm('Bạn có chắc chắn muốn xóa thương hiệu này không?')">
+                                    <button class="btn btn-remove"><i class="fa-solid fa-trash-can"></i></button>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="form-category">
+                <div class="search">
+                    <div class="select-input">
+                        <h4>Chọn thương hiệu</h4>
+                        <form th:action="@{/brands/list}" method="get">
+                            <input type="hidden" name="action" value="brand">
+                            <select name="idBrand" id="idBrand" onchange="this.form.submit()">
+                                <option th:each="brand : ${brandList}"
+                                        th:value="${brand.id}"
+                                        th:text="${brand.name}"
+                                        th:selected="${param.idBrand == brand.id}">
+                                </option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
+                <div class="list-category">
+                    <table border="1">
+                        <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã loại sản phẩm</th>
+                            <th>Tên loại sản phẩm</th>
+                            <th>Hình ảnh</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="category, status : ${categories}">
+                            <td th:text="${status.index + 1}"></td>
+                            <td th:text="${category.id}"></td>
+                            <td th:text="${category.name}"></td>
+                            <td><img th:src="${category.image}" alt=""/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

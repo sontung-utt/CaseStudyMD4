@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/addForm.css}">
+    <link rel="stylesheet" th:href="@{/css/header-form.css}">
+    <script src="https://kit.fontawesome.com/bd7b2915a7.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+<div class="container">
+    <div th:include="~{/fragments/headerForm :: headerForm}"></div>
+    <div class="form">
+        <div class="error-message" th:if="${errorMessage != null}">
+            <p th:text="${errorMessage}"></p>
+        </div>
+
+        <form th:action="@{/brands/edit}" th:object="${brandForm}" method="post"
+              novalidate="novalidate" enctype="multipart/form-data">
+            <table border="1">
+                <tr>
+                    <th colspan="2">SỬA THÔNG TIN THƯƠNG HIỆU</th>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <i class="fa-solid fa-list-ol"></i>
+                        <label for="id">Mã thương hiệu</label>
+                    </td>
+                    <td><input type="text" name="id" id="id" readonly th:field="*{id}"></td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <i class="fa-solid fa-gamepad"></i>
+                        <label for="name">Tên thương hiệu</label>
+                    </td>
+                    <td><input type="text" name="name" id="name" th:field="*{name}"></td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <i class="fa-regular fa-image"></i>
+                        <label for="image">Hình ảnh</label>
+                    </td>
+                    <td><input type="file" name="image" id="image" th:field="*{image}"></td>
+                </tr>
+                <input type="hidden" th:value="${brandForm.oldImage}" name="oldImage" />
+                <tr>
+                    <td th:colspan="2">
+                        <img width="250" height="150" th:src="@{'/images/' + ${brandForm.oldImage}}" alt="">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="tdbtn">
+                        <button type="submit">Sửa thông tin</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>

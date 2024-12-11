@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/bd7b2915a7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/header-form.css}">
+    <title>Thông tin sản phẩm</title>
+</head>
+<body>
+<div th:fragment="headerForm">
+    <div class="header-form">
+        <div class="item-header">
+            <a th:href="@{/products/list}">
+                <i class="fa-solid fa-box-open"></i>
+                <p>Quản lý sản phẩm</p>
+            </a>
+        </div>
+        <div class="item-header">
+            <a th:href="@{/categories/list}">
+                <i class="fa-solid fa-box-archive"></i>
+                <p>Quản lý loại sản phẩm</p>
+            </a>
+        </div>
+        <div class="item-header">
+            <a th:href="@{/brands/list}">
+                <i class="fa-solid fa-tag"></i>
+                <p>Quản lý thương hiệu</p>
+            </a>
+        </div>
+        <div class="item-header">
+            <a th:href="@{/products/list}">
+                <i class="fa-solid fa-house"></i>
+                <p>Quay lại trang chủ</p>
+            </a>
+        </div>
+        <div class="item-header">
+            <a href="">
+                <i class="fa-solid fa-users"></i>
+                <p>Quản lý khách hàng</p>
+            </a>
+        </div>
+        <div class="item-header">
+            <a href="">
+                <i class="fa-solid fa-circle-user"></i>
+                <p>Quản lý tài khoản</p>
+            </a>
+        </div>
+        <div class="item-header">
+            <a href="">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <p>Quản lý đơn hàng</p>
+            </a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

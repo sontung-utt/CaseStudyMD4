@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/bd7b2915a7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/product.css}">
+    <link rel="stylesheet" th:href="@{/css/topFrame.css}">
+    <title>Thông tin sản phẩm</title>
+</head>
+<body>
+<div th:fragment="topFrame">
+    <div class="top-frame">
+        <a th:href="@{/account}">
+            <div class="account">
+                <i class="fa-solid fa-user"></i>
+                <p th:text="${username}"></p>
+            </div>
+        </a>
+        <a th:href="@{/logout}" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất không?');">
+            <div class="logout">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <p>Đăng xuất</p>
+            </div>
+        </a>
+    </div>
+</div>
+<script th:src="@{/js/changeColor.js}"></script>
+</body>
+</html>

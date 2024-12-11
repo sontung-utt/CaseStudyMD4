@@ -1,0 +1,50 @@
+
+.top-frame {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.top-frame {
+    width: calc(100% - 275px);
+    left: 275px;
+    height: 60px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    position: fixed;
+    z-index: 10;
+}
+
+.top-frame .logout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-wrap: wrap;
+    width: 100px;
+    height: 100%;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.top-frame .account {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-wrap: wrap;
+    width: 100px;
+    height: 100%;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.top-frame a {
+    text-decoration: none;
+    color: black;
+}
+
+.top-frame i {
+    font-size: 22px;
+}
+

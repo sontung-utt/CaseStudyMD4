@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <script src="https://kit.fontawesome.com/bd7b2915a7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/leftFrame.css}">
+    <title>Document</title>
+</head>
+<body>
+<div th:fragment="leftFrame">
+    <div class="container">
+        <div class="left-main">
+            <div class="logo">
+                <div class="logo-img">
+                    <img th:src="@{/images/logo.png}" alt="Logo">
+                </div>
+                <div class="user">
+                    <i class="fa-solid fa-user-group"></i>
+                    <p>Nhân viên</p>
+                </div>
+            </div>
+            <div class="manage">
+                <div class="icon">
+                    <div class="item">
+                        <i class="fa-solid fa-circle-user"></i>
+                    </div>
+                    <div class="item">
+                        <i class="fa-solid fa-house"></i>
+                    </div>
+                    <div class="item">
+                        <i class="fa-solid fa-box-open"></i>
+                    </div>
+                    <div class="item">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div class="item">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </div>
+                </div>
+                <div class="info">
+                    <div class="name">
+                        <div class="type-name"></div>
+                        <div class="icon-name">
+                            <i class="fa-solid fa-bars"></i>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <div class="list-item">
+                            <a th:href="@{/products/list}"><i class="fa-solid fa-boxes-packing"></i>Quản lý sản phẩm</a>
+                        </div>
+                        <div class="list-item">
+                            <a th:href="@{/categories/list}"><i class="fa-solid fa-box-open"></i>Quản lý loại sản phẩm</a>
+                        </div>
+                        <div class="list-item">
+                            <a th:href="@{/brands/list}"><i class="fa-solid fa-rectangle-list"></i>Quản lý thương hiệu</a>
+                        </div>
+                        <div class="list-item">
+                            <a th:href="@{/brand_category/list}"><i class="fa-solid fa-layer-group"></i>Quản lý nhóm sản phẩm</a>
+                        </div>
+                        <div class="list-item">
+                            <a th:href="@{/accounts/employee}"><i class="fa-solid fa-user-group"></i>Quản lý tài khoản nhân sự</a>
+                        </div>
+                        <div class="list-item">
+                            <a th:href="@{/accounts/customer}"><i class="fa-solid fa-circle-user"></i>Quản lý tài khoản khách hàng</a>
+                        </div>
+                        <div class="list-item">
+                            <a th:href="@{/employee/list}"><i class="fa-solid fa-user-tie"></i>Quản lý nhân sự</a>
+                        </div>
+                        <div class="list-item">
+                            <a th:href="@{/customers}"><i class="fa-solid fa-users"></i>Quản lý khách hàng</a>
+                        </div>
+                        <div class="list-item">
+                            <a th:href="@{/departments/list}"><i class="fa-solid fa-building-user"></i>Quản lý phòng ban</a>
+                        </div>
+                        <div class="list-item">
+                            <a th:href="@{/role/list}"><i class="fa-solid fa-user-shield"></i>Quản lý chức năng</a>
+                        </div>
+                        <div class="list-item">
+                            <a th:href="@{/orderStaff/order}"><i class="fa-solid fa-cart-shopping"></i>Quản lý đơn hàng</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

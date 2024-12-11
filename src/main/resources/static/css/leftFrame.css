@@ -1,0 +1,138 @@
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+.left-main {
+    height: 725px;
+    width: 275px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position:fixed;
+}
+
+.left-main .logo {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    background-color: rgb(220, 20, 49);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logo .logo-img {
+    width: 70%;
+    height: 100%;
+}
+
+.logo .logo-img img {
+    width: 100%;
+    height: 100%;
+    padding-left: 20px;
+}
+
+.logo .user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+    height: 100%;
+    color: white;
+    row-gap: 8px;
+}
+
+.left-main p {
+    font-size: 13px;
+}
+
+.left-main .manage {
+    width: 100%;
+    height: 665px;
+    display: flex;
+}
+
+.manage .icon {
+    width: 22%;
+    height: 100%;
+    background-color: rgb(220, 20, 49);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.icon .item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 50px;
+    font-size: 18px;
+    color: white;
+    cursor: pointer;
+}
+
+.icon .item:hover{
+    background-color: rgb(120, 13, 29);
+}
+
+.manage .info {
+    background-color: rgb(218, 98, 98);
+    width: 78%;
+    height: 100%;
+}
+
+.info .name {
+    width: 100%;
+    height: 55px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+}
+
+.name .type-name {
+    width: 75%;
+    height: 100%;
+}
+
+.name .icon-name {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 18px;
+}
+
+.name .icon-name i {
+    cursor: pointer;
+}
+
+.info .list .list-item {
+    width: 100%;
+    height: 45px;
+    cursor: pointer;
+}
+
+.info .list .list-item:hover {
+    background-color: rgb(211, 76, 76);
+}
+
+.info .list .list-item .clicked{
+    background-color: rgb(213, 48, 48);
+}
+
+.left-main .list-item a {
+    text-decoration: none;
+    font-size: 15px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 12px;
+    padding-left: 5px;
+}
+
+.left-main .list-item i {
+    font-size: 18px;
+    margin-right: 5px;
+}
