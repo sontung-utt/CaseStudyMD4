@@ -22,4 +22,9 @@ public class BrandCategory {
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
+
+    public BrandCategory(Brand brand, Category category) {
+        this.brand = brand;
+        this.category = category;
+    }
 }

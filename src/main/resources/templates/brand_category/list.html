@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <script src="https://kit.fontawesome.com/bd7b2915a7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/topFrame.css}">
+    <link rel="stylesheet" th:href="@{/css/leftFrame.css}">
+    <link rel="stylesheet" th:href="@{/css/brandcategory.css}">
+    <title>Document</title>
+</head>
+<body>
+
+<div class="container">
+    <div th:include="~{/fragments/leftFrame :: leftFrame}"></div>
+    <div class="main-info">
+        <div th:include="~{/fragments/topFrame :: topFrame}"></div>
+
+        <div class="info">
+            <div class="form">
+                <div class="search">
+                    <div class="add-button">
+                        <a th:href="@{/brand_category/add}">
+                            <i class="fa-solid fa-plus"></i>
+                            <p>Thêm mới</p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="list">
+                    <table border="1">
+                        <tr>
+                            <th>STT</th>
+                            <th>Mã loại</th>
+                            <th>Mã thương hiệu</th>
+                            <th>Tên thương hiệu</th>
+                            <th>Mã loại sản phẩm</th>
+                            <th>Tên loại sản phẩm</th>
+                            <th>Hành động</th>
+                        </tr>
+                        <!-- Duyệt qua danh sách bằng Thymeleaf -->
+                        <tr th:each="item, loopStat : ${list}">
+                            <td th:text="${loopStat.index + 1}"></td>
+                            <td th:text="${item.id}"></td>
+                            <td th:text="${item.brand.id}"></td>
+                            <td th:text="${item.brand.name}"></td>
+                            <td th:text="${item.category.id}"></td>
+                            <td th:text="${item.category.name}"></td>
+                            <td>
+                                <a th:href="@{/brand_category/edit(id=${item.id})}">
+                                    <button class="btn btn-edit">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </button>
+                                </a>
+                                <a th:href="@{/brand_category/delete(id=${item.id})}" onclick="return confirm('Bạn có chắc chắn muốn xóa nhóm này không?')">
+                                    <button class="btn btn-remove">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

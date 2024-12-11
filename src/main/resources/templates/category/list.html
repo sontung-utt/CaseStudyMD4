@@ -70,7 +70,7 @@
                                 <option th:each="item : ${categoryList}"
                                             th:value="${item.id}"
                                             th:text="${item.name}"
-                                            th:selected="${param.idCategory == item.id}">
+                                            th:selected="${selectCategoryId == item.id}">
                                 </option>
                             </select>
                         </form>
@@ -84,11 +84,14 @@
                             <th>Tên thương hiệu</th>
                             <th>Hình ảnh</th>
                         </tr>
+                        <div th:if="${message != null}" class="error-message">
+                            <p th:text="${message}"></p>
+                        </div>
                         <tr th:each="item, status : ${brands}">
                             <td th:text="${status.index + 1}"></td>
                             <td th:text="${item.id}"></td>
                             <td th:text="${item.name}"></td>
-                            <td><img th:src="${item.image}" alt=""></td>
+                            <td><img th:src="@{'/images/' + ${item.image}}" alt=""></td>
                         </tr>
                     </table>
                 </div>

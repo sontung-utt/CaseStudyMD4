@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/addBrandCategory.css}">
+    <link rel="stylesheet" th:href="@{/css/header-form.css}">
+
+    <script src="https://kit.fontawesome.com/bd7b2915a7.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+<div class="container">
+    <div th:include="~{/fragments/headerForm :: headerForm}"></div>
+    <div class="form">
+        <div th:if="${errorMessage != null}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+        </div>
+        <form th:action="@{/brand_category/edit}" method="post">
+            <table border="1">
+                <tr>
+                    <th colspan="2">SỬA THÔNG TIN LOẠI SẢN PHẨM - THƯƠNG HIỆU</th>
+                </tr>
+
+                <tr>
+                    <td class="info">
+                        <i class="fa-solid fa-list-ol"></i>
+                        <label for="id">Mã loại</label>
+                    </td>
+                    <td><input type="text" name="id" id="id" th:value="${brandCategory.id}" readonly></td>
+                </tr>
+
+                <tr>
+                    <td class="info">
+                        <i class="fa-solid fa-box-archive"></i>
+                        <label for="idCategory">Loại sản phẩm</label>
+                    </td>
+                    <td>
+                        <select id="idCategory" name="idCategory">
+                            <th:block th:each="item : ${categoryList}">
+                                <option th:value="${item.id}" th:text="${item.name}"
+                                        th:selected="${item.id == brandCategory.category.id}"></option>
+                            </th:block>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="info">
+                        <i class="fa-solid fa-box-archive"></i>
+                        <label for="idBrand">Thương hiệu</label>
+                    </td>
+                    <td>
+                        <select id="idBrand" name="idBrand">
+                            <th:block th:each="item : ${brandList}">
+                                <option th:value="${item.id}" th:text="${item.name}"
+                                        th:selected="${item.id == brandCategory.brand.id}"></option>
+                            </th:block>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="tdbtn">
+                        <button type="submit">Sửa thông tin</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>

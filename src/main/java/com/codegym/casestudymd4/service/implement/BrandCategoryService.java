@@ -35,4 +35,9 @@ public class BrandCategoryService implements IBrandCategoryService {
     public void delete(Long id) {
         iBrandCategoryRepository.deleteById(id);
     }
+
+    public boolean existBrandCategory(Long idBrand, Long idCategory){
+        Long result = iBrandCategoryRepository.countByBrandAndCategory(idBrand, idCategory);
+        return result != null && result > 0;
+    }
 }

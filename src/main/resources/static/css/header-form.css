@@ -7,7 +7,7 @@
     border-radius: 20px;
     margin-bottom: 30px;
     display: flex;
-    font-size: 15px;
+    font-size: 10px;
     position: relative;
 }
 
@@ -33,4 +33,5 @@ i {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 10px;
 }

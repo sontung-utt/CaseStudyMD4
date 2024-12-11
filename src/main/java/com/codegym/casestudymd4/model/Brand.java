@@ -16,7 +16,6 @@ public class Brand {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "Ô nhập không được để trống!")
     private String name;
 
     private String image;

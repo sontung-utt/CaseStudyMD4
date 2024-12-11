@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -49,8 +51,16 @@ public class BrandController {
         }
         Long selectBrandId = (idBrand != null) ? idBrand : brandList.iterator().next().getId();
         List<Category> categories = categoryService.getCategoriesByBrand(selectBrandId);
+        if (categories.isEmpty()){
+            modelAndView.addObject("message", "Không có loại sản phẩm nào!");
+            modelAndView.addObject("brandList",brandList);
+            modelAndView.addObject("categories", categories);
+            modelAndView.addObject("selectBrandId", selectBrandId);
+            return modelAndView;
+        }
         modelAndView.addObject("brandList",brandList);
         modelAndView.addObject("categories", categories);
+        modelAndView.addObject("selectBrandId", selectBrandId);
         return modelAndView;
     }
 
@@ -62,7 +72,10 @@ public class BrandController {
     }
 
     @PostMapping("/add")
-    public String addBrand(@ModelAttribute("brandForm") BrandForm brandForm, @RequestParam("name") String name, Model model){
+    public String addBrand(@Validated @ModelAttribute("brandForm") BrandForm brandForm, BindingResult bindingResult, @RequestParam("name") String name, Model model){
+        if (bindingResult.hasErrors()) {
+            return "brand/add";
+        }
         MultipartFile multipartFile = brandForm.getImage();
         String fileName = multipartFile.getOriginalFilename();
         try{
@@ -96,7 +109,10 @@ public class BrandController {
     }
 
     @PostMapping("/edit")
-    public String editBrand(@RequestParam Long id, @ModelAttribute BrandForm brandForm, @RequestParam String name, RedirectAttributes redirectAttributes){
+    public String editBrand(@RequestParam Long id, @Validated @ModelAttribute BrandForm brandForm, BindingResult bindingResult, @RequestParam String name, RedirectAttributes redirectAttributes){
+        if (bindingResult.hasErrors()) {
+            return "redirect:/brands/edit?id=" + id;
+        }
         MultipartFile multipartFile = brandForm.getImage();
         String fileName = brandForm.getOldImage();
 

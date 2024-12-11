@@ -53,8 +53,16 @@ public class CategoryController {
         }
         Long selectCategoryId = (idCategory != null) ? idCategory : categoryList.iterator().next().getId();
         List<Brand> brands = brandService.getBrandsByCategory(selectCategoryId);
+        if (brands.isEmpty()){
+            modelAndView.addObject("message", "Không có thương hiệu nào!");
+            modelAndView.addObject("categoryList", categoryList);
+            modelAndView.addObject("brands", brands);
+            modelAndView.addObject("selectCategoryId", selectCategoryId);
+            return modelAndView;
+        }
         modelAndView.addObject("categoryList", categoryList);
         modelAndView.addObject("brands", brands);
+        modelAndView.addObject("selectCategoryId", selectCategoryId);
         return modelAndView;
     }
 
@@ -104,7 +112,10 @@ public class CategoryController {
     }
 
     @PostMapping("/edit")
-    public String editCategory(@RequestParam Long id, @ModelAttribute CategoryForm categoryForm, @RequestParam String name, RedirectAttributes redirectAttributes){
+    public String editCategory(@RequestParam Long id, @Validated @ModelAttribute CategoryForm categoryForm, BindingResult bindingResult, @RequestParam String name, RedirectAttributes redirectAttributes){
+        if (bindingResult.hasErrors()) {
+            return "redirect:/categories/edit?id=" + id;
+        }
         MultipartFile multipartFile = categoryForm.getImage();
         String fileName = categoryForm.getOldImage();
         if (!multipartFile.isEmpty()){

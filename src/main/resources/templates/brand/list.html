@@ -70,7 +70,7 @@
                                 <option th:each="brand : ${brandList}"
                                         th:value="${brand.id}"
                                         th:text="${brand.name}"
-                                        th:selected="${param.idBrand == brand.id}">
+                                        th:selected="${selectBrandId == brand.id}">
                                 </option>
                             </select>
                         </form>
@@ -87,11 +87,14 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <div th:if="${message != null}" class="error-message">
+                            <p th:text="${message}"></p>
+                        </div>
                         <tr th:each="category, status : ${categories}">
                             <td th:text="${status.index + 1}"></td>
                             <td th:text="${category.id}"></td>
                             <td th:text="${category.name}"></td>
-                            <td><img th:src="${category.image}" alt=""/></td>
+                            <td><img th:src="@{'/images/' + ${category.image}}" alt=""/></td>
                         </tr>
                         </tbody>
                     </table>
