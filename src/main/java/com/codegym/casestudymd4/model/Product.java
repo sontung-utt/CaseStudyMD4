@@ -25,6 +25,8 @@ public class Product {
     @NotNull(message = "Truờng số lượng sản phẩm không được để trống!")
     private Long quantity;
     private String image;
+    @NotNull(message = "Truờng thời gian bảo hành sản phẩm không được để trống!")
+    private Integer warranty;
     private String description;
     @ManyToOne
     @JoinColumn(name = "brand_category_id", nullable = false)

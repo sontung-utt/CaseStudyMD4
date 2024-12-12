@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <script src="https://kit.fontawesome.com/bd7b2915a7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/topFrame.css}">
+    <link rel="stylesheet" th:href="@{/css/leftFrame.css}">
+    <link rel="stylesheet" th:href="@{/css/product.css}">
+    <script>
+        // Hiển thị popup
+        function showError(message) {
+            alert(message);
+        }
+    </script>
+    <title>Thông tin sản phẩm</title>
+</head>
+<body>
+<div th:if="${message != null}">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        showError([[${message}]]);
+        /*]]>*/
+    </script>
+</div>
+<div class="container">
+    <div th:include="~{/fragments/leftFrame :: leftFrame}"></div>
+    <div class="main-info">
+        <div th:include="~{/fragments/topFrame :: topFrame}"></div>
+        <div class="search">
+            <div class="add-button">
+                <a th:href="@{/products/add}">
+                    <i class="fa-solid fa-plus"></i>
+                    <p>Thêm mới</p>
+                </a>
+            </div>
+            <div class="sort-area">
+
+            </div>
+            <div class="search-input">
+                <form th:action="@{/products}" method="get">
+                    <input type="hidden" name="action" value="product">
+                    <div class="icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <div class="input">
+                        <input type="text" id="name" name="name" placeholder="Tìm kiếm" th:value="${param.name}" onchange="this.form.submit()">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="info-product">
+            <table border="1">
+                <tr>
+                    <th>STT</th>
+                    <th>Mã sản phẩm</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Giá</th>
+                    <th>Số lượng</th>
+                    <th>Hình ảnh</th>
+                    <th>Loại sản phẩm</th>
+                    <th>Thương hiệu</th>
+                    <th>Bảo hành</th>
+                    <th>Mô tả</th>
+                    <th colspan="2">Hành động</th>
+                </tr>
+                <div th:if="${errorMessage != null}" class="error-message">
+                    <p th:text="${errorMessage}"></p>
+                </div>
+                    <tr th:each="item, status : ${productList}">
+                        <td class="small" th:text="${status.index + 1}"></td>
+                        <td class="medium" th:text="${item.id}"></td>
+                        <td class="medium" th:text="${item.name}"></td>
+                        <td class="medium" th:text="${#numbers.formatDecimal(item.price.stripTrailingZeros().toPlainString(), 0, 0) + ' VNĐ'}" ></td>
+                        <td class="medium" th:text="${item.quantity}"></td>
+                        <td class="medium"><img th:src="@{'/images/' + ${item.image}}" alt="" src=""/></td>
+                        <td class="medium" th:text="${item.brandCategory.category.name}"></td>
+                        <td class="medium" th:text="${item.brandCategory.brand.name}"></td>
+                        <td class="medium" th:text="${item.warranty} + ' tháng'"></td>
+                        <td class="large" th:text="${item.description}"></td>
+                        <td class="medium">
+                            <a th:href="@{/products/edit(id=${item.id})}"><button class="btn btn-edit"><i class="fa-solid fa-pen-to-square"></i></button></a>
+                            <a th:href="@{/products/delete(id=${item.id})}" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')";><button class="btn btn-remove"><i class="fa-solid fa-trash-can"></i></button></a>
+                        </td>
+                    </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

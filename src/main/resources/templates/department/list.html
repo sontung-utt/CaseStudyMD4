@@ -51,11 +51,8 @@
                             <td th:text="${department.name}"></td>
                             <td th:text="${department.salaryCoefficient}"></td>
                             <td>
-                                <a th:href="@{/departments/edit(id=${department.id})}">
-                                    <button class="btn btn-edit"><i class="fa-solid fa-pen-to-square"></i></button>
-                                </a>
-                                <a th:href="@{/departments/delete(id=${department.id})}"
-                                   onclick="return confirm('Bạn có chắc chắn muốn xóa phòng ban này không?');">
+                                <a th:href="@{/departments/edit(id=${department.id})}"><button class="btn btn-edit"><i class="fa-solid fa-pen-to-square"></i></button></a>
+                                <a th:href="@{/departments/delete(id=${department.id})}" onclick="return confirm('Bạn có chắc chắn muốn xóa phòng ban này không?');">
                                     <button class="btn btn-remove"><i class="fa-solid fa-trash-can"></i></button>
                                 </a>
                             </td>

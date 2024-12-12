@@ -10,10 +10,21 @@
     <link rel="stylesheet" th:href="@{/css/topFrame.css}">
     <link rel="stylesheet" th:href="@{/css/leftFrame.css}">
     <link rel="stylesheet" th:href="@{/css/category.css}">
+    <script>
+        function showError(message) {
+            alert(message);
+        }
+    </script>
     <title>Danh sách loại sản phẩm</title>
 </head>
 <body>
-
+<div th:if="${message != null}">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        showError([[${message}]]);
+        /*]]>*/
+    </script>
+</div>
 <div class="container">
     <div th:include="~{/fragments/leftFrame :: leftFrame}"></div>
     <div class="main-info">

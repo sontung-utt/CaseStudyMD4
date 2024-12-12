@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/bd7b2915a7.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/addProduct.css}">
+    <link rel="stylesheet" th:href="@{/css/header-form.css}">
+    <script>
+        // Hiển thị popup
+        function showError(message) {
+            alert(message);
+        }
+    </script>
+    <title>Sửa thông tin sản phẩm</title>
+</head>
+<body>
+<div th:if="${message != null}">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        showError([[${message}]]);
+        /*]]>*/
+    </script>
+</div>
+<div class="container">
+    <div th:include="~{/fragments/headerForm :: headerForm}"></div>
+    <div class="form">
+        <div class="error-message" th:if="${errorMessage}">
+            <p th:text="${errorMessage}"></p>
+        </div>
+        <form th:action="@{/products/edit}" th:object="${productForm}" method="post"
+              novalidate="novalidate" enctype="multipart/form-data">
+            <table border="1">
+                <tr>
+                    <th colspan="2">SỬA THÔNG TIN SẢN PHẨM</th>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <i class="fa-solid fa-list-ol"></i>
+                        <label for="id">Mã sản phẩm</label>
+                    </td>
+                    <td><input type="text" name="id" id="id" th:field="*{id}" readonly></td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <i class="fa-solid fa-gamepad"></i>
+                        <label for="name">Tên sản phẩm</label>
+                    </td>
+                    <td><input type="text" name="name" id="name" th:field="*{name}"></td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <i class="fa-solid fa-money-bill"></i>
+                        <label for="price">Giá sản phẩm</label>
+                    </td>
+                    <td><input type="text" name="price" id="price" th:field="*{price}"></td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <label for="quantity">Số lượng</label>
+                    </td>
+                    <td><input type="text" name="quantity" id="quantity" th:field="*{quantity}"></td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <i class="fa-regular fa-image"></i>
+                        <label for="image">Hình ảnh</label>
+                    </td>
+                    <td><input type="file" name="image" id="image" th:field="*{image}"></td>
+                </tr>
+                <input type="hidden" th:value="${productForm.oldImage}" name="oldImage" />
+                <tr>
+                    <td th:colspan="2">
+                        <img width="350" height="200" th:src="@{'/images/' + ${productForm.oldImage}}" alt="">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <i class="fa-solid fa-box-archive"></i>
+                        <label for="idBrandCategory">Loại sản phẩm</label>
+                    </td>
+                    <td>
+                        <select id="idBrandCategory" name="idBrandCategory">
+                            <option th:each="item : ${list}" th:value="${item.id}"
+                                    th:selected="${item.id == product.brandCategory.id}"
+                                    th:text="${item.brand.name + ' - ' + item.category.name}">
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <i class="fa-solid fa-hourglass-half"></i>
+                        <label for="warranty">Thời gian bảo hành</label>
+                    </td>
+                    <td><input type="number" name="warranty" id="warranty" th:field="*{warranty}"></td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        <label for="description">Mô tả sản phẩm</label>
+                    </td>
+                    <td><input type="text" name="description" id="description" th:field="*{description}"></td>
+                </tr>
+                <tr>
+                    <td th:colspan="2" class="tdbtn">
+                        <a href=""><button>Sửa thông tin</button></a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>

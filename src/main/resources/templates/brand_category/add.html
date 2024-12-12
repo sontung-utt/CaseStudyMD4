@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Cập nhật đường dẫn CSS -->
     <link rel="stylesheet" th:href="@{/css/addBrandCategory.css}">
     <link rel="stylesheet" th:href="@{/css/header-form.css}">
 
@@ -37,7 +36,6 @@
                     </td>
                     <td>
                         <select id="idCategory" name="idCategory">
-                            <!-- Duyệt qua danh sách các loại sản phẩm -->
                             <option th:each="item : ${categoryList}" th:value="${item.id}" th:text="${item.name}"></option>
                         </select>
                     </td>
@@ -56,7 +54,7 @@
                 </tr>
 
                 <tr>
-                    <td colspan="2" class="tdbtn">
+                    <td th:colspan="2" class="tdbtn">
                         <a href=""><button>Thêm mới</button></a>
                     </td>
                 </tr>

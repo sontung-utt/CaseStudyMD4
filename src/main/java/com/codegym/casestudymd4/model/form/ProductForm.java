@@ -22,6 +22,8 @@ public class ProductForm {
     private Long quantity;
     private MultipartFile image;
     private String oldImage;
+    @NotNull(message = "Truờng thời gian bảo hành sản phẩm không được để trống!")
+    private Integer warranty;
     private String description;
     @ManyToOne
     @JoinColumn(name = "brand_category_id", nullable = false)

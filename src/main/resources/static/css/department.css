@@ -52,11 +52,11 @@ th, td {
     text-align: center;
 }
 
-.table .btn {
+.btn {
     padding: 5px;
     border-radius: 4px;
     color: white;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: bold;
     border: none;
     width: 35px;
@@ -75,7 +75,7 @@ th, td {
 .btn-edit {
     background-color: gold;
     border: 2px solid rgb(239, 218, 98);
-    margin-right: 5px;
+    margin-right: 3px;
 }
 
 .btn-edit:hover {
@@ -94,11 +94,11 @@ th {
 
 
 .info tr:nth-child(even) {
-    background-color: pink;
+    background-color: bisque;
 }
 
 .info tr:nth-child(odd) {
-    background-color: rgb(251, 148, 165);
+    background-color: burlywood;
 }
 
 .form-department .search {

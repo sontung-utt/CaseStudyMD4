@@ -41,10 +41,10 @@
                     </td>
                     <td>
                         <select id="idCategory" name="idCategory">
-                            <th:block th:each="item : ${categoryList}">
-                                <option th:value="${item.id}" th:text="${item.name}"
-                                        th:selected="${item.id == brandCategory.category.id}"></option>
-                            </th:block>
+                            <option th:each="item : ${categoryList}"
+                                    th:value="${item.id}" th:text="${item.name}"
+                                    th:selected="${item.id == brandCategory.category.id}">
+                            </option>
                         </select>
                     </td>
                 </tr>

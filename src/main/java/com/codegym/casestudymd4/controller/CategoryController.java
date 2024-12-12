@@ -98,9 +98,13 @@ public class CategoryController {
     @GetMapping("/edit")
     public ModelAndView showFormEdit(@RequestParam Long id){
         Optional<Category> optionalCategory = iCategoryService.findById(id);
+        Iterable<Category> categoryList = iCategoryService.findAll();
         ModelAndView modelAndView = new ModelAndView("category/edit");
         if (!optionalCategory.isPresent()){
-            throw new IllegalArgumentException("Invalid category Id:" + id);
+            modelAndView = new ModelAndView("category/list");
+            modelAndView.addObject("message", "Không tìm thấy mã loại sản phẩm "+ id + "!");
+            modelAndView.addObject("categoryList", categoryList);
+            return modelAndView;
         }
         Category category = optionalCategory.get();
         CategoryForm categoryForm = new CategoryForm();
@@ -133,7 +137,8 @@ public class CategoryController {
 
         Optional<Category> categoryOptional = iCategoryService.findById(id);
         if (!categoryOptional.isPresent()){
-            throw new IllegalArgumentException("Invalid category Id:" + id);
+            redirectAttributes.addFlashAttribute("message", "Mã loại sản phẩm không tồn tại!");
+            return "redirect:/categories/list";
         }
 
         Category existCategory = categoryOptional.get();
