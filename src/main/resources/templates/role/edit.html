@@ -3,57 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/addForm.css}">
-    <link rel="stylesheet" th:href="@{/css/header-form.css}">
-    <script src="https://kit.fontawesome.com/bd7b2915a7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/addRole.css}">
+    <link rel="stylesheet" th:href="@{/css/header-form.css}">    <script src="https://kit.fontawesome.com/bd7b2915a7.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
           rel="stylesheet">
-    <title>Document</title>
+    <title>Sửa thông tin chức năng</title>
 </head>
 <body>
 <div class="container">
     <div th:include="~{/fragments/headerForm :: headerForm}"></div>
     <div class="form">
-        <div class="error-message" th:if="${errorMessage != null}">
+        <div th:if="${errorMessage != null}" class="error-message">
             <p th:text="${errorMessage}"></p>
         </div>
-
-        <form th:action="@{/brands/edit}" th:object="${brandForm}" method="post"
-              novalidate="novalidate" enctype="multipart/form-data">
+        <form th:action="@{/role/edit}" th:object="${role}" method="post">
             <table border="1">
                 <tr>
-                    <th colspan="2">SỬA THÔNG TIN THƯƠNG HIỆU</th>
+                    <th colspan="2">SỬA THÔNG TIN CHỨC NĂNG</th>
                 </tr>
                 <tr>
                     <td class="info">
                         <i class="fa-solid fa-list-ol"></i>
-                        <label for="id">Mã thương hiệu</label>
+                        <label for="id">Mã chức năng</label>
                     </td>
-                    <td><input type="text" name="id" id="id" readonly th:field="*{id}"></td>
+                    <td><input type="text" name="id" id="id" th:field="*{id}" readonly></td>
                 </tr>
                 <tr>
                     <td class="info">
-                        <i class="fa-solid fa-gamepad"></i>
-                        <label for="name">Tên thương hiệu</label>
+                        <i class="fa-solid fa-circle-info"></i>
+                        <label for="name">Tên chức năng</label>
                     </td>
                     <td><input type="text" name="name" id="name" th:field="*{name}">
                         <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></td>
                 </tr>
                 <tr>
                     <td class="info">
-                        <i class="fa-regular fa-image"></i>
-                        <label for="image">Hình ảnh</label>
+                        <i class="fa-solid fa-circle-info"></i>
+                        <label for="name">Tên hiển thị</label>
                     </td>
-                    <td><input type="file" name="image" id="image" th:field="*{image}"></td>
+                    <td><input type="text" name="displayName" id="displayName" th:field="*{displayName}">
+                        <span th:if="${#fields.hasErrors('displayName')}" th:errors="*{displayName}"></span></td>
                 </tr>
-                <input type="hidden" th:value="${brandForm.oldImage}" name="oldImage" />
-                <tr>
-                    <td th:colspan="2">
-                        <img width="250" height="150" th:src="@{'/images/' + ${brandForm.oldImage}}" alt="">
-                    </td>
-                </tr>
+
                 <tr>
                     <td colspan="2" class="tdbtn">
                         <button type="submit">Sửa thông tin</button>

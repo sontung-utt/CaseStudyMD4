@@ -111,7 +111,7 @@ public class BrandController {
     @PostMapping("/edit")
     public String editBrand(@RequestParam Long id, @Validated @ModelAttribute BrandForm brandForm, BindingResult bindingResult, @RequestParam String name, RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()) {
-            return "redirect:/brands/edit?id=" + id;
+            return "brand/edit";
         }
         MultipartFile multipartFile = brandForm.getImage();
         String fileName = brandForm.getOldImage();

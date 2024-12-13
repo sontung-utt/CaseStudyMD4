@@ -37,6 +37,7 @@ public class DepartmentController {
             modelAndView.addObject("errorMessage", "Chưa có phòng ban nào trong hệ thống.");
             modelAndView.addObject("departmentList", departmentList);
             modelAndView.addObject("staffs", List.of());
+            return modelAndView;
         }
         Long selectDepartmentId = (idDepartment != null) ? idDepartment : departmentList.iterator().next().getId();
         List<Staff> staffs = staffService.getStaffsByDepartment(selectDepartmentId);
@@ -87,7 +88,8 @@ public class DepartmentController {
     @PostMapping("/edit")
     public String editDepartment(@RequestParam Long id, @Validated @ModelAttribute Department department, BindingResult bindingResult, @RequestParam String name, RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()){
-            return "redirect:/departments/edit?id=" + id;
+            //return "redirect:/departments/edit?id=" + id;
+            return "department/edit";
         }
         Optional<Department> departmentOptional = iDepartmentService.findById(id);
         Department existDepartment = departmentOptional.get();

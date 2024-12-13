@@ -116,9 +116,10 @@ public class CategoryController {
     }
 
     @PostMapping("/edit")
-    public String editCategory(@RequestParam Long id, @Validated @ModelAttribute CategoryForm categoryForm, BindingResult bindingResult, @RequestParam String name, RedirectAttributes redirectAttributes){
+    public String editCategory(@RequestParam Long id, @Validated @ModelAttribute CategoryForm categoryForm, BindingResult bindingResult, @RequestParam String name, RedirectAttributes redirectAttributes, Model model){
         if (bindingResult.hasErrors()) {
-            return "redirect:/categories/edit?id=" + id;
+            model.addAttribute("categoryForm", categoryForm);
+            return "category/edit";
         }
         MultipartFile multipartFile = categoryForm.getImage();
         String fileName = categoryForm.getOldImage();

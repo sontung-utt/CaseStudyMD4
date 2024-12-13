@@ -1,25 +1,33 @@
-package com.codegym.casestudymd4.model;
+package com.codegym.casestudymd4.model.form;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.UniqueConstraint;
+import com.codegym.casestudymd4.model.Department;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
-@MappedSuperclass
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
-    @NotBlank(message = "Trường tên không được để trống!")
+public class StaffForm {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NotBlank(message = "Trường tên nhân sự không được để trống!")
     private String name;
     @NotBlank(message = "Trường giới tính không được để trống!")
     private String gender;
-    private String birth;
+    @NotBlank(message = "Trường ngày sinh không được để trống!")
+    private LocalDate birth;
+    private MultipartFile image;
+    private String oldImage;
     @NotBlank(message = "Trường địa chỉ không được để trống!")
     private String address;
     @NotBlank(message = "Trường email không được để trống!")
@@ -29,7 +37,11 @@ public class User {
     private String email;
     @NotBlank(message = "Trường số điện thoại không được để trống!")
     @Pattern(regexp = "^(0[3|5|7|8|9])+([0-9]{8})$", message = "Số điện thoại nhập sai định dạng!")
-    @Column(unique=true)
+    @Column(unique = true)
     private String phone;
-
+    @NotNull(message = "Trường tiền lương không được để trống!")
+    private BigDecimal salary;
+    @ManyToOne
+    @JoinColumn(name = "department_id", nullable = false)
+    private Department department;
 }

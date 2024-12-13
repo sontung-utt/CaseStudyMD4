@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/header-form.css}">
+    <link rel="stylesheet" th:href="@{/css/addForm.css}">
+    <script src="https://kit.fontawesome.com/bd7b2915a7.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <title>Thêm tài khoản</title>
+</head>
+<body>
+<div class="container">
+    <div th:include="~{/fragments/headerForm :: headerForm}"></div>
+    <div class="form">
+        <div th:if="${errorMessage != null}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+        </div>
+        <div class="form">
+            <form th:action="@{/staff_account/add}" th:object="${staffAccount}" method="post">
+                <table border="1">
+                    <tr>
+                        <th colspan="2">THÊM MỚI TÀI KHOẢN</th>
+                    </tr>
+                    <tr>
+                        <td class="info">
+                            <i class="fa-solid fa-circle-user"></i>
+                            <label for="username">Tên tài khoản</label>
+                        </td>
+                        <td><input type="text" name="username" id="username" th:field="*{username}">
+                            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="info">
+                            <i class="fa-solid fa-lock"></i>
+                            <label for="password">Mật khẩu</label>
+                        </td>
+                        <td><input type="password" name="password" id="password" th:field="*{password}">
+                            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span></td>
+                    </tr>
+                    <tr>
+                        <td class="info">
+                            <i class="fa-solid fa-house-circle-check"></i>
+                            <label for="idRole">Chức năng</label>
+                        </td>
+                        <td>
+                            <select id="idRole" name="idRole">
+                                <option th:each="item : ${roleList}" th:value="${item.id}" th:text="${item.displayName}"></option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="tdbtn">
+                            <button type="submit">Thêm tài khoản</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -38,7 +38,6 @@ public class ProductController {
     @GetMapping("/list")
     public ModelAndView getProductList(){
         Iterable<Product> productList = iProductService.findAll();
-        //Optional<>
         ModelAndView modelAndView = new ModelAndView("product/list");
         if (!productList.iterator().hasNext()){
             modelAndView.addObject("errorMessage", "Chưa có sản phẩm nào trong hệ thống.");
@@ -108,9 +107,9 @@ public class ProductController {
     }
 
     @PostMapping("/edit")
-    public String editProduct(@RequestParam Long id, @Validated @ModelAttribute ProductForm productForm, BindingResult bindingResult, @RequestParam Long idBrandCategory, RedirectAttributes redirectAttributes){
+    public String editProduct(@RequestParam Long id, @Validated @ModelAttribute ProductForm productForm, BindingResult bindingResult, @RequestParam(required = false) Long idBrandCategory, RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("message", "Các trường tên sản phẩm, Giá sản phẩm, Số lượng, Thời gian bảo hành không được để trống!");
+            redirectAttributes.addFlashAttribute("errorMessage", "Các trường Tên sản phẩm - Giá sản phẩm - Số lượng - Thời gian bảo hành KHÔNG được để trống!");
             return "redirect:/products/edit?id=" + id;
         }
         MultipartFile multipartFile = productForm.getImage();
