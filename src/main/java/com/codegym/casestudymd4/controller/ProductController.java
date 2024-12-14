@@ -58,7 +58,10 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public String addProduct(@Validated @ModelAttribute(name = "productForm") ProductForm productForm, BindingResult bindingResult, @RequestParam Long idBrandCategory, Model model){
+    public String addProduct(@Validated @ModelAttribute(name = "productForm") ProductForm productForm,
+                             BindingResult bindingResult,
+                             @RequestParam Long idBrandCategory,
+                             Model model){
         Iterable<BrandCategory> list = iBrandCategoryService.findAll();
         if (bindingResult.hasErrors()){
             model.addAttribute("list", list);
@@ -107,7 +110,11 @@ public class ProductController {
     }
 
     @PostMapping("/edit")
-    public String editProduct(@RequestParam Long id, @Validated @ModelAttribute ProductForm productForm, BindingResult bindingResult, @RequestParam(required = false) Long idBrandCategory, RedirectAttributes redirectAttributes){
+    public String editProduct(@RequestParam Long id,
+                              @Validated @ModelAttribute ProductForm productForm,
+                              BindingResult bindingResult,
+                              @RequestParam(required = false) Long idBrandCategory,
+                              RedirectAttributes redirectAttributes){
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("errorMessage", "Các trường Tên sản phẩm - Giá sản phẩm - Số lượng - Thời gian bảo hành KHÔNG được để trống!");
             return "redirect:/products/edit?id=" + id;

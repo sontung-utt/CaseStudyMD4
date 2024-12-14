@@ -39,4 +39,19 @@ public class StaffService implements IStaffService {
     public List<Staff> getStaffsByDepartment(Long departmentId) {
         return iStaffRepository.findByDepartmentId(departmentId);
     }
+
+    public boolean usedStaffAccount(Long idUser){
+        Long result = iStaffRepository.usedAccount(idUser);
+        return result != null && result > 0;
+    }
+
+    public boolean existEmail(String email){
+        Long result = iStaffRepository.existEmail(email);
+        return result != null && result > 0;
+    }
+
+    public boolean existPhone(String phone){
+        Long result = iStaffRepository.existPhone(phone);
+        return result != null && result > 0;
+    }
 }

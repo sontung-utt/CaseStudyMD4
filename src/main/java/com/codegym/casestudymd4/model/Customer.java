@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "customer")
@@ -22,8 +23,7 @@ public class Customer{
     private String name;
     @NotBlank(message = "Trường giới tính không được để trống!")
     private String gender;
-    @NotBlank(message = "Trường ngày sinh không được để trống!")
-    private LocalDate birth;
+    private Date birth;
     @NotBlank(message = "Trường địa chỉ không được để trống!")
     private String address;
     @NotBlank(message = "Trường email không được để trống!")

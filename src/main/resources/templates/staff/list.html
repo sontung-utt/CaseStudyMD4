@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <script src="https://kit.fontawesome.com/bd7b2915a7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/topFrame.css}">
+    <link rel="stylesheet" th:href="@{/css/leftFrame.css}">
+    <link rel="stylesheet" th:href="@{/css/staff.css}">
+    <title>Thông tin nhân sự</title>
+</head>
+<body>
+<div class="container">
+    <div th:include="~{/fragments/leftFrame :: leftFrame}"></div>
+    <div class="main-info">
+        <div th:include="~{/fragments/topFrame :: topFrame}"></div>
+        <div class="search">
+            <div class="add-button">
+                <a th:href="@{/staffs/add}">
+                    <i class="fa-solid fa-plus"></i>
+                    <p>Thêm mới</p>
+                </a>
+            </div>
+            <div class="sort-area">
+
+            </div>
+            <div class="search-input">
+                <form th:action="@{/staffs}" method="get">
+                    <input type="hidden" name="action" value="staff">
+                    <div class="icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <div class="input">
+                        <input type="text" id="name" name="name" placeholder="Tìm kiếm"
+                               th:value="${param.name}" onchange="this.form.submit()">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="info-product">
+            <table border="1">
+                <tr>
+                    <th>STT</th>
+                    <th>Mã nhân sự</th>
+                    <th>Tên nhân sự</th>
+                    <th>Tên tài khoản</th>
+                    <th>Giới tính</th>
+                    <th>Ngày sinh</th>
+                    <th>Hình ảnh</th>
+                    <th>Điện thoại</th>
+                    <th>Email</th>
+                    <th>Lương</th>
+                    <th>Phòng ban</th>
+                    <th>Hành động</th>
+                </tr>
+                <div th:if="${errorMessage != null}" class="error-message">
+                    <p th:text="${errorMessage}"></p>
+                </div>
+                <tr th:each="item, loopStat : ${staffList}">
+                    <td class="small" th:text="${loopStat.index + 1}"></td>
+                    <td class="medium" th:text="${item.id}"></td>
+                    <td class="medium" th:text="${item.name}"></td>
+                    <td class="medium" th:text="${item.staffAccount.username}"></td>
+                    <td class="medium" th:text="${item.gender}"></td>
+                    <td class="medium" th:text="${#dates.format(item.birth, 'dd-MM-yyyy')}"></td>
+                    <td class="medium"><img th:src="@{'/images/' + ${item.image}}" alt="" src=""/></td>
+                    <td class="medium" th:text="${item.phone}"></td>
+                    <td class="large" th:text="${item.email}"></td>
+                    <td class="medium" th:text="${item.salary}"></td>
+                    <td class="medium" th:text="${item.department.name}"></td>
+                    <td class="medium">
+                        <a th:href="@{/staffs/edit(id=${item.id})}">
+                            <button class="btn btn-edit">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                        </a>
+                        <a th:href="@{/staffs/delete(id=${item.id})}"
+                           onclick="return confirm('Bạn có chắc chắn muốn xóa nhân sự này không?');">
+                            <button class="btn btn-remove">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

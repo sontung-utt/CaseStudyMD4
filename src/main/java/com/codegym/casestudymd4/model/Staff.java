@@ -11,9 +11,10 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
-@Table(name = "staff")
+@Table(name = "staffs")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,8 +26,7 @@ public class Staff{
     private String name;
     @NotBlank(message = "Trường giới tính không được để trống!")
     private String gender;
-    @NotNull(message = "Trường ngày sinh không được để trống!")
-    private LocalDate birth;
+    private Date birth;
     private String image;
     @NotBlank(message = "Trường địa chỉ không được để trống!")
     private String address;
@@ -44,7 +44,7 @@ public class Staff{
     @ManyToOne
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private StaffAccount staffAccount;
 }

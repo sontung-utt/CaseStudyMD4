@@ -1,6 +1,7 @@
 package com.codegym.casestudymd4.model.form;
 
 import com.codegym.casestudymd4.model.Department;
+import com.codegym.casestudymd4.model.StaffAccount;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -24,8 +26,7 @@ public class StaffForm {
     private String name;
     @NotBlank(message = "Trường giới tính không được để trống!")
     private String gender;
-    @NotBlank(message = "Trường ngày sinh không được để trống!")
-    private LocalDate birth;
+    private Date birth;
     private MultipartFile image;
     private String oldImage;
     @NotBlank(message = "Trường địa chỉ không được để trống!")
@@ -44,4 +45,7 @@ public class StaffForm {
     @ManyToOne
     @JoinColumn(name = "department_id", nullable = false)
     private Department department;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private StaffAccount staffAccount;
 }

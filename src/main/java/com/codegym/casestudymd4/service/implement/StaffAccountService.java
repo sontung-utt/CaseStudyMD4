@@ -42,4 +42,12 @@ public class StaffAccountService implements IStaffAccountService {
         Long result = iStaffAccountRepository.existUsername(username);
         return result != null && result > 0;
     }
+
+    public boolean existStaffAccount(Long idUser){
+        return iStaffAccountRepository.existsById(idUser);
+    }
+
+    public Long getIdByUsername(String username){
+        return iStaffAccountRepository.findIdByUsername(username);
+    }
 }
