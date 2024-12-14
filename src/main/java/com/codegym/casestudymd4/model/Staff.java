@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name = "staffs")
@@ -26,7 +26,7 @@ public class Staff{
     private String name;
     @NotBlank(message = "Trường giới tính không được để trống!")
     private String gender;
-    private Date birth;
+    private LocalDate birth;
     private String image;
     @NotBlank(message = "Trường địa chỉ không được để trống!")
     private String address;

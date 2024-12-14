@@ -133,6 +133,7 @@ public class ProductController {
                 e.printStackTrace();
             }
         }
+        idBrandCategory = productForm.getBrandCategory().getId();
         Optional<Product> optionalProduct = iProductService.findById(id);
         Optional<BrandCategory> optionalBrandCategory = iBrandCategoryService.findById(idBrandCategory);
         BrandCategory brandCategory = optionalBrandCategory.get();

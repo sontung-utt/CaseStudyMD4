@@ -27,7 +27,7 @@
                 </tr>
                 <tr>
                     <td class="info">
-                        <label for="username">Mã tài khoản</label>
+                        <label for="username">Tên tài khoản</label>
                     </td>
                     <td><input type="text" name="username" id="username"></td>
                 </tr>
@@ -42,7 +42,7 @@
                     <td class="info">
                         <label for="birth">Ngày sinh</label>
                     </td>
-                    <td><input type="date" name="birth" id="birth" th:field="*{birth}"></td>
+                    <td><input type="date" name="birth" id="birth" th:value="${staffForm.birth}"></td>
                 </tr>
                 <tr>
                     <td class="info">
@@ -102,7 +102,7 @@
 
                 <tr>
                     <td colspan="2" class="tdbtn">
-                        <button>Thêm nhân sự</button>
+                        <button type="submit">Thêm nhân sự</button>
                     </td>
                 </tr>
             </table>

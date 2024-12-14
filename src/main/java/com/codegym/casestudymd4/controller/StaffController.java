@@ -7,11 +7,9 @@ import com.codegym.casestudymd4.model.form.StaffForm;
 import com.codegym.casestudymd4.service.IDepartmentService;
 import com.codegym.casestudymd4.service.IStaffAccountService;
 import com.codegym.casestudymd4.service.IStaffService;
-import com.codegym.casestudymd4.service.implement.DepartmentService;
 import com.codegym.casestudymd4.service.implement.StaffAccountService;
 import com.codegym.casestudymd4.service.implement.StaffService;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -20,6 +18,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
@@ -77,7 +76,7 @@ public class StaffController {
                            @RequestParam String email,
                            Model model) {
         Iterable<Department> departments = iDepartmentService.findAll();
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasFieldErrors()){
             model.addAttribute("departments", departments);
             return "staff/add";
         }
@@ -90,7 +89,7 @@ public class StaffController {
         }
         Long idUser = staffAccountService.getIdByUsername(username);
         if (idUser == null) {
-            model.addAttribute("errorMessage", "Tài khoản không tồn tại!");
+            model.addAttribute("errorMessage", "Tài khoản " + username + " không tồn tại!");
             model.addAttribute("departments", departments);
             return "staff/add";
         }
@@ -103,7 +102,7 @@ public class StaffController {
         }
 
         if (staffService.usedStaffAccount(idUser)){
-            model.addAttribute("errorMessage", "Tài khoản đã được sử dụng!");
+            model.addAttribute("errorMessage", "Tài khoản " + username + " đã được sử dụng!");
             model.addAttribute("departments", departments);
             return "staff/add";
         }
@@ -120,7 +119,7 @@ public class StaffController {
             return "staff/add";
         }
 
-        Staff staff = new Staff(staffForm.getId(), staffForm.getName(), staffForm.getGender(),staffForm.getBirth(), fileName, staffForm.getAddress(), email, phone, staffForm.getSalary(), departmentOptional.get(), staffAccountOptional.get());
+        Staff staff = new Staff(staffForm.getId(), staffForm.getName(), staffForm.getGender(), staffForm.getBirth(), fileName, staffForm.getAddress(), email, phone, staffForm.getSalary(), departmentOptional.get(), staffAccountOptional.get());
         iStaffService.save(staff);
         return "redirect:/staffs/list";
     }
@@ -155,5 +154,79 @@ public class StaffController {
         modelAndView.addObject("departments", departments);
         modelAndView.addObject("staff",staff);
         return modelAndView;
+    }
+
+    @PostMapping("/edit")
+    public String editStaff(@RequestParam Long id,
+                            @Validated @ModelAttribute StaffForm staffForm,
+                            BindingResult bindingResult,
+                            @RequestParam(required = false) Long idDepartment,
+                            @RequestParam String username,
+                            @RequestParam String phone,
+                            @RequestParam String email,
+                            RedirectAttributes redirectAttributes){
+        if (bindingResult.hasFieldErrors()){
+            return "redirect:/staffs/edit?id=" + id;
+        }
+        MultipartFile multipartFile = staffForm.getImage();
+        String fileName = staffForm.getOldImage();
+        if (!multipartFile.isEmpty()){
+            try {
+                File oldFile = new File(uploadFile + staffForm.getOldImage());
+                if (oldFile.exists()){
+                    oldFile.delete();
+                }
+                fileName = multipartFile.getOriginalFilename();
+                FileCopyUtils.copy(staffForm.getImage().getBytes(),new File(uploadFile + fileName));
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+        idDepartment = staffForm.getDepartment().getId();
+        Optional<Staff> staffOptional = iStaffService.findById(id);
+        Optional<Department> departmentOptional = iDepartmentService.findById(idDepartment);
+        Department department = departmentOptional.get();
+        if (!staffOptional.isPresent()){
+            redirectAttributes.addFlashAttribute("message", "Mã nhân sự không tồn tại!");
+            return "redirect:/staffs/list";
+        }
+        Iterable<Department> departments = iDepartmentService.findAll();
+        Staff existStaff = staffOptional.get();
+        Long idUser = staffAccountService.getIdByUsername(username);
+        if (!existStaff.getStaffAccount().getUsername().equals(username)){
+            if (idUser == null) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Tài khoản " + username + " không tồn tại!");
+                return "redirect:/staffs/edit?id=" + id;
+            }
+            if (staffService.usedStaffAccount(idUser)){
+                redirectAttributes.addFlashAttribute("errorMessage", "Tài khoản " + username + " đã được sử dụng!");
+                return "redirect:/staffs/edit?id=" + id;
+            }
+        }
+
+        Optional<StaffAccount> staffAccountOptional = iStaffAccountService.findById(idUser);
+
+        if (!existStaff.getPhone().equals(phone)){
+            if(staffService.existPhone(phone)){
+                redirectAttributes.addFlashAttribute("errorMessage", "Số điện thoại đã được sử dụng!");
+                return "redirect:/staffs/edit?id=" + id;
+            }
+        }
+
+        if (!existStaff.getEmail().equals(email)){
+            if(staffService.existEmail(email)){
+                redirectAttributes.addFlashAttribute("errorMessage", "Email đã được sử dụng!");
+                return "redirect:/staffs/edit?id=" + id;
+            }
+        }
+        Staff staff = new Staff(existStaff.getId(),staffForm.getName(), staffForm.getGender(), staffForm.getBirth(), fileName, staffForm.getAddress(), email, phone, staffForm.getSalary(), department, staffAccountOptional.get());
+        iStaffService.save(staff);
+        return "redirect:/staffs/list";
+    }
+
+    @GetMapping("/delete")
+    public String deleteStaff(@RequestParam Long id){
+        iStaffService.delete(id);
+        return "redirect:/staffs/list";
     }
 }

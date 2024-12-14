@@ -27,9 +27,15 @@
                 </tr>
                 <tr>
                     <td class="info">
+                        <label for="id">Mã nhân sự</label>
+                    </td>
+                    <td><input type="text" name="id" id="id" th:field="*{id}" readonly></td>
+                </tr>
+                <tr>
+                    <td class="info">
                         <label for="username">Tên tài khoản</label>
                     </td>
-                    <td><input type="text" name="username" id="username" th:field="*{staffAccount.username}"></td>
+                    <td><input type="text" name="username" id="username" th:value="${staffForm.staffAccount.username}"></td>
                 </tr>
                 <tr>
                     <td class="info">
@@ -43,7 +49,7 @@
                         <label for="birth">Ngày sinh</label>
                     </td>
                     <td><input type="date" name="birth" id="birth"
-                        th:value="${staffForm.birth != null ? #dates.format(staffForm.birth, 'yyyy-MM-dd') : ''}"></td>
+                        th:value="${staffForm.birth != null ? staffForm.birth : ''}"></td>
                 </tr>
                 <tr>
                     <td class="info">
@@ -90,7 +96,8 @@
                     <td class="info">
                         <label for="salary">Lương</label>
                     </td>
-                    <td><input type="number" name="salary" id="salary" th:field="*{salary}">
+                    <td><input type="number" name="salary" id="salary"
+                               th:value="${#numbers.formatDecimal(staffForm.salary.stripTrailingZeros().toPlainString(), 0, 0)}">
                         <span th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}"></span></td>
                 </tr>
                 <tr>

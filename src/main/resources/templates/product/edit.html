@@ -47,8 +47,10 @@
                         <i class="fa-solid fa-money-bill"></i>
                         <label for="price">Giá sản phẩm</label>
                     </td>
-                    <td><input type="text" name="price" id="price" th:field="*{price}">
-                        <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span></td>
+                    <td><input type="text" name="price" id="price"
+                               th:value="${#numbers.formatDecimal(productForm.price.stripTrailingZeros().toPlainString(), 0, 0)}">
+                        <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+                    </td>
                 </tr>
                 <tr>
                     <td class="info">

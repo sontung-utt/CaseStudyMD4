@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-@Table(name = "customer")
+@Table(name = "customers")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,7 +23,7 @@ public class Customer{
     private String name;
     @NotBlank(message = "Trường giới tính không được để trống!")
     private String gender;
-    private Date birth;
+    private LocalDate birth;
     @NotBlank(message = "Trường địa chỉ không được để trống!")
     private String address;
     @NotBlank(message = "Trường email không được để trống!")

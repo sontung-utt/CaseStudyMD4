@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -26,7 +25,7 @@ public class StaffForm {
     private String name;
     @NotBlank(message = "Trường giới tính không được để trống!")
     private String gender;
-    private Date birth;
+    private LocalDate birth;
     private MultipartFile image;
     private String oldImage;
     @NotBlank(message = "Trường địa chỉ không được để trống!")

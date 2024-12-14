@@ -98,7 +98,7 @@
                             <td th:text="${loopStat.index + 1}"></td>
                             <td th:text="${staff.id}"></td>
                             <td th:text="${staff.name}"></td>
-                            <td><img th:src="${staff.image}" alt=""></td>
+                            <td><img th:src="@{'/images/' + ${staff.image}}" alt="" src=""/></td>
                             <td th:text="${staff.phone}"></td>
                             <td th:text="${staff.email}"></td>
                         </tr>
