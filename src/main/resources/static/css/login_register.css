@@ -1,0 +1,153 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+.header {
+    width: 100%;
+    height: 70px;
+    background-color: rgb(220, 20, 49);
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    align-items: center;
+    padding-left: 80px;
+    padding-right: 40px;
+}
+
+.header p {
+    font-size: 14px;
+    color: white;
+}
+
+.header .logo {
+    width: 12%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.logo img {
+    width: 100%;
+    height: 100%;
+}
+
+.header .user {
+    height: 100%;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.login, .register {
+    align-items: center;
+    cursor: pointer;
+    width: 130px;
+    height: 55px;
+    padding-top: 2px;
+}
+
+.login:hover, .register:hover {
+    height: 55px;
+    border-radius: 20px;
+    background-color: rgba(171, 170, 170, 0.5);
+}
+
+.user i {
+    font-size: 22px;
+    color: white ;
+}
+
+.icon {
+    text-align: center;
+    margin-top: 5px;
+}
+
+.item {
+    text-align: center;
+    margin-top: 5px;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.form {
+    margin-top: 30px;
+    color: white;
+}
+
+form {
+    width: 540px;
+    height: 500px;
+}
+
+table {
+    width: 100%;
+    background-color: darksalmon;
+}
+
+input {
+    width: 98%;
+    outline: none;
+    font-size: 15px;
+    border: none;
+    background-color: rgb(235, 186, 170);
+    height: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+th {
+    padding: 10px;
+    font-size: 25px;
+}
+
+td {
+    padding: 6px;
+    font-size: 16px;
+}
+
+.info {
+    width: 30%;
+}
+
+.info i {
+    font-size: 18px;
+    margin-right: 5px;
+    text-align: center;
+}
+
+button {
+    background-color: rgb(195, 76, 36);
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 2px solid rgb(160, 51, 14);
+    color: white;
+    width: 150px;
+    height: 40px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+button:hover {
+    background-color: rgb(164, 51, 13);
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+.tdbtn {
+    text-align: center;
+}

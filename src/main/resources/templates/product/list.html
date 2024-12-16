@@ -71,22 +71,22 @@
                 <div th:if="${errorMessage != null}" class="error-message">
                     <p th:text="${errorMessage}"></p>
                 </div>
-                    <tr th:each="item, status : ${productList}">
-                        <td class="small" th:text="${status.index + 1}"></td>
-                        <td class="medium" th:text="${item.id}"></td>
-                        <td class="medium" th:text="${item.name}"></td>
-                        <td class="medium" th:text="${#numbers.formatDecimal(item.price.stripTrailingZeros().toPlainString(), 0, 0) + ' VNĐ'}" ></td>
-                        <td class="medium" th:text="${item.quantity}"></td>
-                        <td class="medium"><img th:src="@{'/images/' + ${item.image}}" alt="" src=""/></td>
-                        <td class="medium" th:text="${item.brandCategory.category.name}"></td>
-                        <td class="medium" th:text="${item.brandCategory.brand.name}"></td>
-                        <td class="medium" th:text="${item.warranty} + ' tháng'"></td>
-                        <td class="large" th:text="${item.description}"></td>
-                        <td class="medium">
-                            <a th:href="@{/products/edit(id=${item.id})}"><button class="btn btn-edit"><i class="fa-solid fa-pen-to-square"></i></button></a>
-                            <a th:href="@{/products/delete(id=${item.id})}" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')";><button class="btn btn-remove"><i class="fa-solid fa-trash-can"></i></button></a>
-                        </td>
-                    </tr>
+                <tr th:each="item, status : ${productList}">
+                    <td class="small" th:text="${status.index + 1}"></td>
+                    <td class="medium" th:text="${item.id}"></td>
+                    <td class="medium" th:text="${item.name}"></td>
+                    <td class="medium" th:text="${#numbers.formatDecimal(item.price.stripTrailingZeros().toPlainString(), 0, 0) + ' VNĐ'}" ></td>
+                    <td class="medium" th:text="${item.quantity}"></td>
+                    <td class="medium"><img th:src="@{'/images/' + ${item.image}}" alt="" src=""/></td>
+                    <td class="medium" th:text="${item.brandCategory.category.name}"></td>
+                    <td class="medium" th:text="${item.brandCategory.brand.name}"></td>
+                    <td class="medium" th:text="${item.warranty} + ' tháng'"></td>
+                    <td class="large" th:text="${item.description}"></td>
+                    <td class="medium">
+                        <a th:href="@{/products/edit(id=${item.id})}"><button class="btn btn-edit"><i class="fa-solid fa-pen-to-square"></i></button></a>
+                        <a th:href="@{/products/delete(id=${item.id})}" onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')";><button class="btn btn-remove"><i class="fa-solid fa-trash-can"></i></button></a>
+                    </td>
+                </tr>
 
             </table>
         </div>

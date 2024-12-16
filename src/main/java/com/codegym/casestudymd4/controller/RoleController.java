@@ -5,6 +5,7 @@ import com.codegym.casestudymd4.model.StaffAccount;
 import com.codegym.casestudymd4.service.IRoleService;
 import com.codegym.casestudymd4.service.implement.RoleService;
 import com.codegym.casestudymd4.service.implement.StaffAccountService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +25,7 @@ public class RoleController {
     private final IRoleService iRoleService;
     private final RoleService roleService;
     private final StaffAccountService staffAccountService;
+    @Autowired
     public RoleController(IRoleService iRoleService, RoleService roleService, StaffAccountService staffAccountService){
         this.iRoleService = iRoleService;
         this.roleService = roleService;
@@ -36,7 +38,7 @@ public class RoleController {
     }
 
     @GetMapping("/list")
-    public ModelAndView getRoleList(@RequestParam(required = false) Long idRole){
+    public ModelAndView getRoleList(@RequestParam(value = "idRole",required = false) Long idRole){
         Iterable<Role> roleList = iRoleService.findAll();
         ModelAndView modelAndView = new ModelAndView("role/list");
         if (!roleList.iterator().hasNext()){

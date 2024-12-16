@@ -109,7 +109,7 @@
                         <select id="idDepartment" name="idDepartment" th:field="*{department.id}">
                             <option th:each="item : ${departments}" th:value="${item.id}"
                                     th:text="${item.name}"
-                                    th:selected="${item.id == staff.department.id}">
+                                    th:selected="${item.id == staffForm.department.id}">
                             </option>
                         </select>
                     </td>

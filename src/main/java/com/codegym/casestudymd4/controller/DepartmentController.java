@@ -6,6 +6,7 @@ import com.codegym.casestudymd4.repository.IDepartmentRepository;
 import com.codegym.casestudymd4.service.IDepartmentService;
 import com.codegym.casestudymd4.service.implement.DepartmentService;
 import com.codegym.casestudymd4.service.implement.StaffService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +24,7 @@ public class DepartmentController {
     private final IDepartmentService iDepartmentService;
     private final DepartmentService departmentService;
     private final StaffService staffService;
+    @Autowired
     public DepartmentController(IDepartmentService iDepartmentService, DepartmentService departmentService, StaffService staffService){
         this.iDepartmentService = iDepartmentService;
         this.departmentService = departmentService;

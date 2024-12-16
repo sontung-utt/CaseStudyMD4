@@ -12,11 +12,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "staff_accounts")
+@Table(name = "customer_accounts")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StaffAccount {
+public class CustomerAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,9 +26,6 @@ public class StaffAccount {
     @NotBlank(message = "Trường mật khẩu không được để trống!")
     @ValidPassword
     private String password;
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
     @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime created_at;
     @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm:ss")
@@ -36,7 +33,10 @@ public class StaffAccount {
     private String formattedCreatedAt;
     private String formattedModifiedAt;
 
-    public StaffAccount(Long id, String username, String password, Role role, LocalDateTime createdAt, LocalDateTime modifiedAt) {
+    public CustomerAccount(Long id, String username, String password, LocalDateTime createdAt, LocalDateTime modifiedAt) {
+    }
+
+    public CustomerAccount(String username, String password) {
     }
 
     @PrePersist

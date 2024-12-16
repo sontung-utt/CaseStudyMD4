@@ -47,8 +47,7 @@
                         <i class="fa-solid fa-money-bill"></i>
                         <label for="price">Giá sản phẩm</label>
                     </td>
-                    <td><input type="text" name="price" id="price"
-                               th:value="${#numbers.formatDecimal(productForm.price.stripTrailingZeros().toPlainString(), 0, 0)}">
+                    <td><input type="text" name="price" id="price" th:field="*{price}">
                         <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
                     </td>
                 </tr>
@@ -81,7 +80,7 @@
                     <td>
                         <select id="idBrandCategory" name="idBrandCategory" th:field="*{brandCategory.id}">
                             <option th:each="item : ${list}" th:value="${item.id}"
-                                    th:selected="${item.id == product.brandCategory.id}"
+                                    th:selected="${item.id == productForm.brandCategory.id}"
                                     th:text="${item.brand.name + ' - ' + item.category.name}">
                             </option>
                         </select>

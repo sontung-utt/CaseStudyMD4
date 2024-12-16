@@ -1,5 +1,6 @@
 package com.codegym.casestudymd4.controller;
 
+import com.codegym.casestudymd4.model.CustomerAccount;
 import com.codegym.casestudymd4.model.Role;
 import com.codegym.casestudymd4.model.StaffAccount;
 import com.codegym.casestudymd4.service.IRoleService;
@@ -30,6 +31,32 @@ public class StaffAccountController {
         this.iStaffAccountService = iStaffAccountService;
         this.staffAccountService = staffAccountService;
         this.iRoleService = iRoleService;
+    }
+
+    @GetMapping("/login")
+    public ModelAndView showLoginForm(){
+        ModelAndView modelAndView = new ModelAndView("staff_account/login");
+        modelAndView.addObject("user",new StaffAccount());
+        return modelAndView;
+    }
+
+    @PostMapping("/login")
+    public String loginCustomer(@ModelAttribute CustomerAccount customerAccount,
+                                @RequestParam("username") String username,
+                                @RequestParam("password") String password,
+                                Model model){
+        model.addAttribute("user", customerAccount);
+        if (staffAccountService.checkUser(username, password)){
+            return "redirect:/products/list";
+        } else {
+            model.addAttribute("errorMessage", "Tên đăng nhập hoặc mật khẩu không đúng!");
+            return "staff_account/login";
+        }
+    }
+
+    @GetMapping("/register")
+    public String showRegisterForm(){
+        return "staff_account/register";
     }
 
     public String formatLocalDateTime(LocalDateTime localDateTime) {

@@ -3,13 +3,20 @@ package com.codegym.casestudymd4.service.implement;
 import com.codegym.casestudymd4.model.StaffAccount;
 import com.codegym.casestudymd4.repository.IStaffAccountRepository;
 import com.codegym.casestudymd4.service.IStaffAccountService;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class StaffAccountService implements IStaffAccountService {
+public class StaffAccountService implements IStaffAccountService, UserDetailsService {
     private final IStaffAccountRepository iStaffAccountRepository;
     public StaffAccountService(IStaffAccountRepository iStaffAccountRepository){
         this.iStaffAccountRepository = iStaffAccountRepository;
@@ -49,5 +56,25 @@ public class StaffAccountService implements IStaffAccountService {
 
     public Long getIdByUsername(String username){
         return iStaffAccountRepository.findIdByUsername(username);
+    }
+
+    public StaffAccount findByUsername (String username){
+        return iStaffAccountRepository.findByUsername(username);
+    }
+
+    public boolean checkUser(String username, String password){
+        Long result = iStaffAccountRepository.checkUser(username, password);
+        return result != null && result > 0;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        StaffAccount staffAccount = iStaffAccountRepository.findByUsername(username);
+        if (staffAccount != null){
+            List<GrantedAuthority> authorities = new ArrayList<>();
+            authorities.add(new SimpleGrantedAuthority(staffAccount.getRole().getName()));
+            return new User(staffAccount.getUsername(), staffAccount.getPassword(), authorities);
+        }
+        throw new UsernameNotFoundException("Không tìm thấy người dùng!");
     }
 }

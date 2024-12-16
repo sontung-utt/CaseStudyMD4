@@ -9,6 +9,7 @@ import com.codegym.casestudymd4.service.IStaffAccountService;
 import com.codegym.casestudymd4.service.IStaffService;
 import com.codegym.casestudymd4.service.implement.StaffAccountService;
 import com.codegym.casestudymd4.service.implement.StaffService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +38,7 @@ public class StaffController {
     private final StaffAccountService staffAccountService;
     private final IStaffAccountService iStaffAccountService;
     private final IDepartmentService iDepartmentService;
+    @Autowired
     public StaffController(IStaffService iStaffService, IDepartmentService iDepartmentService, StaffAccountService staffAccountService, IStaffAccountService iStaffAccountService, StaffService staffService){
         this.iStaffService = iStaffService;
         this.iDepartmentService = iDepartmentService;

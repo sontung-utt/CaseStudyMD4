@@ -38,7 +38,7 @@ public class RoleService implements IRoleService {
         return result != null && result > 0;
     }
 
-    public Optional<Role> findByName (String name){
+    public Role findByName (String name){
         return iRoleRepository.findByName(name);
     }
 }

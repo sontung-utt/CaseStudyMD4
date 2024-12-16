@@ -8,7 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "customers")
@@ -35,5 +34,8 @@ public class Customer{
     @Pattern(regexp = "^(0[3|5|7|8|9])+([0-9]{8})$", message = "Số điện thoại nhập sai định dạng!")
     @Column(unique = true)
     private String phone;
-    private String rank;
+    private String ranking;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private CustomerAccount customerAccount;
 }

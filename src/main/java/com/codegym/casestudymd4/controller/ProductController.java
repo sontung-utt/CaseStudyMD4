@@ -114,10 +114,18 @@ public class ProductController {
                               @Validated @ModelAttribute ProductForm productForm,
                               BindingResult bindingResult,
                               @RequestParam(required = false) Long idBrandCategory,
-                              RedirectAttributes redirectAttributes){
+                              RedirectAttributes redirectAttributes,
+                              Model model){
+        Iterable<BrandCategory> list = iBrandCategoryService.findAll();
+        idBrandCategory = productForm.getBrandCategory().getId();
+        Optional<BrandCategory> optionalBrandCategory = iBrandCategoryService.findById(idBrandCategory);
+        BrandCategory brandCategory = optionalBrandCategory.get();
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Các trường Tên sản phẩm - Giá sản phẩm - Số lượng - Thời gian bảo hành KHÔNG được để trống!");
-            return "redirect:/products/edit?id=" + id;
+            //redirectAttributes.addFlashAttribute("errorMessage", "Các trường Tên sản phẩm - Giá sản phẩm - Số lượng - Thời gian bảo hành KHÔNG được để trống!");
+            //return "redirect:/products/edit?id=" + id;
+            model.addAttribute("list", list);
+            model.addAttribute("productForm", productForm);
+            return "product/edit";
         }
         MultipartFile multipartFile = productForm.getImage();
         String fileName = productForm.getOldImage();
@@ -133,16 +141,17 @@ public class ProductController {
                 e.printStackTrace();
             }
         }
-        idBrandCategory = productForm.getBrandCategory().getId();
+
         Optional<Product> optionalProduct = iProductService.findById(id);
-        Optional<BrandCategory> optionalBrandCategory = iBrandCategoryService.findById(idBrandCategory);
-        BrandCategory brandCategory = optionalBrandCategory.get();
+
         if (!optionalProduct.isPresent()){
             redirectAttributes.addFlashAttribute("message", "Mã sản phẩm không tồn tại!");
             return "redirect:/products/list";
         }
         Product existProduct = optionalProduct.get();
-        Product product = new Product(existProduct.getId(),productForm.getName(),productForm.getPrice(),productForm.getQuantity(),fileName,productForm.getWarranty(),productForm.getDescription(),brandCategory);
+        Product product = new Product(existProduct.getId(),productForm.getName(),productForm.getPrice(),
+                productForm.getQuantity(),fileName,productForm.getWarranty(),productForm.getDescription(),
+                brandCategory);
         iProductService.save(product);
         return "redirect:/products/list";
     }

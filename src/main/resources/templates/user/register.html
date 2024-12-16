@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/bd7b2915a7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/login_register.css}"/>
+    <title>Đăng ký</title>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="logo">
+            <img th:src="@{/images/logo.png}" alt="Logo">
+        </div>
+        <div class="user">
+            <a th:href="@{/user/login}">
+                <div class="login">
+                    <div class="icon">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="item">
+                        <p>Đăng nhập hệ thống</p>
+                    </div>
+                </div>
+            </a>
+            <a th:href="@{/user/register}">
+                <div class="register">
+                    <div class="icon">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </div>
+                    <div class="item">
+                        <p>Đăng ký tài khoản</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="form">
+        <div th:if="${errorMessage}" style="color: red;">[[${errorMessage}]]</div>
+        <form th:action="@{/user/register}" th:object="${user}" method="post">
+            <table border="1">
+                <tr>
+                    <th colspan="2">ĐĂNG KÝ TÀI KHOẢN</th>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <i class="fa-solid fa-user"></i>
+                        <label for="username">Tên đăng nhập</label>
+                    </td>
+                    <td><input type="text" name="username" id="username" th:field="*{username}">
+                        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span></td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <i class="fa-solid fa-key"></i>
+                        <label for="password">Mật khẩu</label>
+                    </td>
+                    <td><input type="password" name="password" id="password" th:field="*{password}">
+                        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span></td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <i class="fa-solid fa-lock"></i>
+                        <label for="rePassword">Nhập lại mật khẩu</label>
+                    </td>
+                    <td><input type="password" name="rePassword" id="rePassword"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="tdbtn">
+                        <button type="submit">ĐĂNG KÝ</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>

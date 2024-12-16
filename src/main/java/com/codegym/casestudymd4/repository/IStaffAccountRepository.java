@@ -1,5 +1,6 @@
 package com.codegym.casestudymd4.repository;
 
+import com.codegym.casestudymd4.model.Staff;
 import com.codegym.casestudymd4.model.StaffAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,8 +12,8 @@ import java.util.Optional;
 
 @Repository
 public interface IStaffAccountRepository extends JpaRepository<StaffAccount,Long> {
-    @Query("select s from StaffAccount s where s.role.id = :role")
-    List<StaffAccount> findByRoleId(@Param("role") Long role);
+    @Query("select s from StaffAccount s where s.role.id = :roleId")
+    List<StaffAccount> findByRoleId(@Param("roleId") Long roleId);
 
     @Query("SELECT COUNT(b) FROM StaffAccount b where b.username = :username")
     Long existUsername (@Param("username") String username);
@@ -22,4 +23,9 @@ public interface IStaffAccountRepository extends JpaRepository<StaffAccount,Long
 
     @Query("select a.id from StaffAccount a where a.username = :username")
     Long findIdByUsername(String username);
+
+    StaffAccount findByUsername(String username);
+
+    @Query("SELECT COUNT(b) FROM StaffAccount b where b.username = :username and b.password = :password")
+    Long checkUser (@Param("username") String username, @Param("password") String password);
 }

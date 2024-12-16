@@ -15,7 +15,7 @@ public interface IRoleRepository extends JpaRepository<Role, Long> {
     @Query("SELECT COUNT(b) FROM Role b where b.name = :name")
     Long existRoleName (@Param("name") String name);
 
-    Optional<Role> findByName(String name);
+    Role findByName(String name);
 
     @Query("SELECT r.displayName FROM Role r WHERE r.name = :name")
     String findDisplayNameByName(@Param("name") String name);
