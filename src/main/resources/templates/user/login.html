@@ -17,7 +17,7 @@
             <img th:src="@{/images/logo.png}" alt="Logo">
         </div>
         <div class="user">
-            <a th:href="@{/user/login}">
+            <a th:href="@{/login}">
                 <div class="login">
                     <div class="icon">
                         <i class="fa-solid fa-user"></i>
@@ -41,7 +41,7 @@
     </div>
     <div class="form">
         <div th:if="${errorMessage}" style="color: red;">[[${errorMessage}]]</div>
-        <form th:action="@{/user/login}" th:object="${user}" method="post">
+        <form th:action="@{/login}" th:object="${user}" method="post">
             <table border="1">
                 <tr>
                     <th colspan="2">ĐĂNG NHẬP HỆ THỐNG</th>

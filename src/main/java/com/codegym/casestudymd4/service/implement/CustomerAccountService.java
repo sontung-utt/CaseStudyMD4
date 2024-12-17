@@ -4,18 +4,13 @@ import com.codegym.casestudymd4.model.CustomerAccount;
 import com.codegym.casestudymd4.model.StaffAccount;
 import com.codegym.casestudymd4.repository.ICustomerAccountRepository;
 import com.codegym.casestudymd4.service.ICustomerAccountService;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.Optional;
 
 @Service
-public class CustomerAccountService implements ICustomerAccountService, UserDetailsService {
+public class CustomerAccountService implements ICustomerAccountService {
     private final ICustomerAccountRepository iCustomerAccountRepository;
     public CustomerAccountService(ICustomerAccountRepository iCustomerAccountRepository){
         this.iCustomerAccountRepository = iCustomerAccountRepository;
@@ -66,15 +61,8 @@ public class CustomerAccountService implements ICustomerAccountService, UserDeta
         return result != null && result > 0;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        CustomerAccount customerAccount = iCustomerAccountRepository.findByUsername(username);
-        if (customerAccount != null){
-            return new User(
-                    customerAccount.getUsername(),
-                    customerAccount.getPassword(),
-                    Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
-        }
-        throw new UsernameNotFoundException("Không tìm thấy người dùng!");
+    public String getUsernameById(Long id){
+        return iCustomerAccountRepository.getUsernameById(id);
     }
+
 }

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <script src="https://kit.fontawesome.com/bd7b2915a7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/customer.css}">
+    <link rel="stylesheet" th:href="@{/css/topFrame.css}">
+    <link rel="stylesheet" th:href="@{/css/leftFrame.css}">
+    <title>Thông tin tài khoản khách hàng</title>
+</head>
+<body>
+<div class="container">
+    <div th:include="~{/fragments/leftFrame :: leftFrame}"></div>
+    <div class="main-info">
+        <div th:include="~{/fragments/topFrame :: topFrame}"></div>
+
+        <div class="search">
+            <div class="sort-area">
+                <!-- Sorting area (optional) -->
+            </div>
+            <div class="search-input">
+                <div class="icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <div class="input">
+                    <input type="text" id="search-input" placeholder="Tìm kiếm">
+                </div>
+            </div>
+        </div>
+
+        <div class="info-product">
+            <table border="1">
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Mã tài khoản</th>
+                    <th>Tên tài khoản</th>
+                    <th>Mật khẩu</th>
+                    <th>Ngày tạo</th>
+                    <th>Ngày sửa</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Error message if present -->
+                <div th:if="${errorMessage}" class="error-message">
+                    <p th:text="${errorMessage}"></p>
+                </div>
+
+                <!-- Iterate over the list of accounts -->
+                <tr th:each="item, iterStat : ${list}">
+                    <td class="small" th:text="${iterStat.index + 1}"></td>
+                    <td class="medium" th:text="${item.id}"></td>
+                    <td class="medium" th:text="${item.username}"></td>
+                    <td class="medium" th:text="${item.password}"></td>
+                    <td class="large" th:text="${item.getFormattedCreatedAt()}"></td>
+                    <td class="large" th:text="${item.getFormattedModifiedAt()}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

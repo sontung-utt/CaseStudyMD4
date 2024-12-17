@@ -16,4 +16,8 @@ public interface ICustomerRepository extends JpaRepository<Customer, Long> {
 
     @Query("SELECT COUNT(a) FROM Customer a where a.phone = :phone")
     Long existPhone(@Param("phone") String phone);
+
+    @Query("SELECT a.id FROM Customer a where a.customerAccount.id = :userId    ")
+    Long getIdByUserId(@Param("userId") Long userId);
+
 }

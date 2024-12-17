@@ -1,0 +1,135 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Roboto Condensed", sans-serif;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-form {
+    width: 30%;
+    height: 70px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    background-color: rgb(247, 239, 224);
+    border-radius: 20px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    color: black;
+}
+
+.item-header a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    text-align: center;
+}
+
+p {
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+i {
+    font-size: 20px;
+}
+
+.item-header {
+    width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-cart {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    width: 65%;
+    align-content: center;
+}
+
+th {
+    padding: 10px;
+    font-size: 16px;
+    background-color: darkgrey;
+}
+
+.info-cart td {
+    padding: 6px;
+    font-size: 16px;
+    align-content: center;
+}
+
+.info-cart tr:nth-child(even) {
+    background-color: wheat ;
+
+}
+
+.info-cart tr:nth-child(odd) {
+    background-color: rgb(245, 210, 146);
+}
+
+.info-cart .btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-cart .btn a{
+    text-decoration: none;
+}
+
+.info-cart button {
+    width: 32px;
+    height: 27px;
+    background-color: rgb(215, 48, 48);
+    border: none;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.info-cart i {
+    margin-left: 5px;
+}
+
+.info-cart button:hover {
+    background-color: darkred;
+}
+
+.info-cart i {
+    font-size: 16px;
+    margin-right: 5px;
+    text-align: center;
+    color: white;
+}
+
+.info-cart .thbtn a {
+    text-decoration: none;
+    border: 1px solid black;
+    padding: 8px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #ff6a00;
+    color: white;
+    border-radius: 50px;
+    font-size: 17px;
+}

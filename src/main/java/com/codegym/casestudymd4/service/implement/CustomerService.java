@@ -47,4 +47,8 @@ public class CustomerService implements ICustomerService {
         Long result = iCustomerRepository.existPhone(phone);
         return result != null && result > 0;
     }
+
+    public Long getIdByUserId(Long userId){
+        return iCustomerRepository.getIdByUserId(userId);
+    }
 }

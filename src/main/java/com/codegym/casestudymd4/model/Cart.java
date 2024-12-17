@@ -17,4 +17,8 @@ public class Cart {
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
+
+    public Cart(Customer customer) {
+        this.customer = customer;
+    }
 }

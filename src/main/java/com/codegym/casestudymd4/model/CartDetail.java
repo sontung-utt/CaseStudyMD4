@@ -29,6 +29,21 @@ public class CartDetail {
     private LocalDateTime created_at;
     private String formattedCreatedAt;
 
+    public CartDetail(Cart cart, Product product, Long quantity, BigDecimal price){
+        this.cart = cart;
+        this.product = product;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
+    public CartDetail(Long id, Cart cart, Product product, Long quantity, BigDecimal price){
+        this.id = id;
+        this.cart = cart;
+        this.product = product;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
     @PrePersist
     public void prePersist(){
         created_at = LocalDateTime.now();

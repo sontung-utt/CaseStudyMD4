@@ -115,11 +115,10 @@
 
             </div>
             <div class="cart">
-                <a >
-<!--                    th:href="@{/home/(${idCart})}"-->
+                <a th:href="@{/cart}">
                     <div class="icon">
                         <i class="fa-solid fa-cart-shopping"></i>
-                        <div class="quantity-cart">${numProduct}</div>
+                        <div class="quantity-cart" th:text="${numProduct ?: 0}"></div>
                     </div>
                     <div class="item">
                         <p>Giỏ hàng</p>
@@ -127,7 +126,7 @@
                 </a>
             </div>
             <div class="info">
-                <a th:href="@{/home}">
+                <a th:href="@{/home/add}">
                     <div class="icon">
                         <i class="fa-solid fa-user-pen"></i>
                     </div>
@@ -142,7 +141,7 @@
                     <i class="fa-solid fa-user-large"></i>
                 </div>
                 <div class="item">
-                    <a href="http://localhost:8080/accCustomers?action=view"><p>${customerUserName}</p></a>
+                    <a th:href="@{/user/account}" th:text="${customerUsername}"><p></p></a>
                     <a th:href="@{/logout}"><p onclick="return confirm('Bạn có chắc chắn muốn đăng xuất không?')";>Đăng xuất</p></a>
                 </div>
             </div>
@@ -510,7 +509,7 @@
                         <p th:text="${product.description}"></p>
                     </div>
                     <div class="cart-i">
-                        <a><i class="fa-solid fa-cart-plus"></i></a>
+                        <a th:href="@{/cart/add(idProduct=${product.id})}"><i class="fa-solid fa-cart-plus"></i></a>
                     </div>
                 </div>
 

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/bd7b2915a7.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/addCustomer.css}">
+
+    <title>Form thêm mới</title>
+</head>
+<body>
+<div class="container">
+
+    <div class="form">
+        <div class="header-form">
+
+            <div class="item-header">
+                <a th:href="@{/home}">
+                    <i class="fa-solid fa-house"></i>
+                    <p>Trang chủ</p>
+                </a>
+            </div>
+
+        </div>
+        <div class="error-message" th:if="${errorMessage}" style="color: red;">
+            <p th:text="${errorMessage}"></p>
+        </div>
+        <form th:action="@{/user/account}" th:object="${customerAccount}" method="get">
+            <table border="1">
+                <tr>
+                    <th colspan="2">THÔNG TIN TÀI KHOẢN</th>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <label for="id">Mã tài khoản</label>
+                    </td>
+                    <td><input type="text" name="id" id="id" readonly th:value="${customerAccount.id}"></td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <label for="username">Tên tài khoản</label>
+                    </td>
+                    <td><input type="text" name="username" id="username" readonly th:value="${customerAccount.username}"></td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <label for="password">Mật khẩu</label>
+                    </td>
+                    <td><input type="text" name="password" id="password" readonly th:value="${customerAccount.password}"></td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <label for="created_at">Ngày tạo</label>
+                    </td>
+                    <td><input type="text" name="created_at" id="created_at" readonly th:value="${customerAccount.getFormattedCreatedAt()}"></td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <label for="modified_at">Ngày sửa</label>
+                    </td>
+                    <td><input type="text" name="modified_at" id="modified_at" readonly th:value="${customerAccount.getFormattedModifiedAt()}"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="tdbtn">
+                        <a th:href="@{/user/edit}">
+                            <button type="button">Sửa thông tin</button>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>

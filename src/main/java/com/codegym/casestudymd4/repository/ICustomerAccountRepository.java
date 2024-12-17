@@ -16,6 +16,9 @@ public interface ICustomerAccountRepository extends JpaRepository<CustomerAccoun
 
     CustomerAccount findByUsername(String username);
 
+    @Query("SELECT a.username FROM CustomerAccount a where a.id = :id")
+    String getUsernameById(@Param("id") Long id);
+
     @Query("select a.id from CustomerAccount a where a.username = :username")
     Long findIdByUsername(String username);
 
