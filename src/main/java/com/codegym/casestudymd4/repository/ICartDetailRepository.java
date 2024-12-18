@@ -1,11 +1,14 @@
 package com.codegym.casestudymd4.repository;
 
 import com.codegym.casestudymd4.model.CartDetail;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
@@ -21,4 +24,12 @@ public interface ICartDetailRepository extends JpaRepository<CartDetail, Long> {
 
     @Query("select a from CartDetail a where a.cart.id = :idCart and a.product.id = :idProduct")
     CartDetail findByIdProduct(@Param("idCart") Long idCart, @Param("idProduct") Long idProduct);
+
+    @Query("select sum(a.price * a.quantity) from CartDetail a where a.cart.id = :idCart")
+    BigDecimal getTotalByCartId(@Param("idCart") Long idCart);
+
+    @Modifying
+    @Transactional
+    @Query("delete from CartDetail a where a.cart.id = :idCart")
+    void deleteCartDetailByCartId(@Param("idCart") Long idCart);
 }

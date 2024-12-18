@@ -9,6 +9,7 @@ import com.codegym.casestudymd4.service.implement.CartService;
 import com.codegym.casestudymd4.service.implement.CustomerService;
 import com.codegym.casestudymd4.service.implement.ProductService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,7 @@ public class CartController {
     private final CustomerService customerService;
     private final ProductService productService;
 
+    @Autowired
     public CartController(CartService cartService,
                           CartDetailService cartDetailService,
                           CustomerService customerService,
@@ -51,8 +53,13 @@ public class CartController {
         if (idLogin == null) {
             return new ModelAndView("user/login");
         }
-        ModelAndView modelAndView = new ModelAndView("cart/list");
         Long idCustomer = customerService.getIdByUserId(idLogin);
+        if (idCustomer == null){
+            ModelAndView modelAndView = new ModelAndView("customer/add");
+            modelAndView.addObject("customer", new Customer());
+            return modelAndView;
+        }
+        ModelAndView modelAndView = new ModelAndView("cart/list");
         Long idCart = cartService.getIdByIdCustomer(idCustomer);
         List<CartDetail> cartDetailList = cartDetailService.listCartDetailByCartId(idCart);
         if (cartDetailList.isEmpty()){

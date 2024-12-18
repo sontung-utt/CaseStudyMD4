@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <script src="https://kit.fontawesome.com/bd7b2915a7.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" th:href="@{/css/customer.css}">
+    <link rel="stylesheet" th:href="@{/css/topFrame.css}">
+    <link rel="stylesheet" th:href="@{/css/leftFrame.css}">
+    <title>Thông tin đơn hàng</title>
+</head>
+<body>
+<div class="container">
+    <!-- Include leftFrame and topFrame using Thymeleaf -->
+    <div th:include="~{/fragments/leftFrame :: leftFrame}"></div>
+    <div class="main-info">
+        <div th:include="~{/fragments/topFrame :: topFrame}"></div>
+        <div class="search">
+            <div class="sort-area">
+
+            </div>
+            <div class="search-input">
+                <form action="@{/orderStaff}" method="get">
+                    <input type="hidden" name="action" value="order">
+                    <div class="icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                    <div class="input">
+                        <input type="text" id="nameCustomer" name="nameCustomer" placeholder="Tìm kiếm" th:value="${param.nameCustomer}" th:onchange="this.form.submit()">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="info-product">
+            <table border="1">
+                <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Mã đơn hàng</th>
+                    <th>Tên khách hàng</th>
+                    <th>Ngày đặt hàng</th>
+                    <th>Tổng tiền</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Display error message if exists -->
+                <div th:if="${not #lists.isEmpty(errorMessage)}" class="error-message">
+                    <p th:text="${errorMessage}"></p>
+                </div>
+
+                <!-- Loop through orderList and display the orders -->
+                <tr th:each="item, iterStat : ${orderList}">
+                    <td th:text="${iterStat.index + 1}"></td>
+                    <td th:text="${item.id}"></td>
+                    <td th:text="${item.customer.name}"></td>
+                    <td th:text="${item.formattedTime}"></td>
+                    <td th:text="${#numbers.formatDecimal(item.total.stripTrailingZeros().toPlainString(), 0, 0) + ' VNĐ'}"></td>
+                    <td th:text="${item.status}"></td>
+                    <td class="medium">
+                        <a th:href="@{/order_staff/edit(id=${item.id})}">
+                            <button class="btn btn-edit">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                        </a>
+                        <a th:href="@{/order_staff/view(id=${item.id})}">
+                            <button class="btn btn-remove">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

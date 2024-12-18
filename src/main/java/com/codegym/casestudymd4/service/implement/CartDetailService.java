@@ -5,6 +5,7 @@ import com.codegym.casestudymd4.repository.ICartDetailRepository;
 import com.codegym.casestudymd4.service.ICartDetailService;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,5 +50,13 @@ public class CartDetailService implements ICartDetailService {
 
     public CartDetail findByProductId(Long idCart, Long idProduct){
         return iCartDetailRepository.findByIdProduct(idCart, idProduct);
+    }
+
+    public BigDecimal getTotalByCartId (Long idCart) {
+        return iCartDetailRepository.getTotalByCartId(idCart);
+    }
+
+    public void deleteCartDetailByCartId (Long idCart) {
+        iCartDetailRepository.deleteCartDetailByCartId(idCart);
     }
 }

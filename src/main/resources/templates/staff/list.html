@@ -70,7 +70,7 @@
                     <td class="medium"><img th:src="@{'/images/' + ${item.image}}" alt="" src=""/></td>
                     <td class="medium" th:text="${item.phone}"></td>
                     <td class="large" th:text="${item.email}"></td>
-                    <td class="medium" th:text="${#numbers.formatDecimal(item.salary.stripTrailingZeros().toPlainString(), 0, 0)}"></td>
+                    <td class="medium" th:text="${#numbers.formatDecimal(item.salary.stripTrailingZeros().toPlainString(), 0, 0)+ ' VNĐ'}"></td>
                     <td class="medium" th:text="${item.department.name}"></td>
                     <td class="medium">
                         <a th:href="@{/staffs/edit(id=${item.id})}">

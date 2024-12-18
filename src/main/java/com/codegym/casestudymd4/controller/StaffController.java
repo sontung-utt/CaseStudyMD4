@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
@@ -49,6 +50,10 @@ public class StaffController {
     @GetMapping("/list")
     public ModelAndView showStaffList(){
         Iterable<Staff> staffList = iStaffService.findAll();
+        for (Staff staff : staffList) {
+            BigDecimal salary = staff.getSalary().multiply(BigDecimal.valueOf(staff.getDepartment().getSalaryCoefficient()));
+            staff.setSalary(salary);
+        }
         ModelAndView modelAndView = new ModelAndView("staff/list");
         if (!staffList.iterator().hasNext()){
             modelAndView.addObject("errorMessage", "Chưa có nhân sự nào trong hệ thống.");

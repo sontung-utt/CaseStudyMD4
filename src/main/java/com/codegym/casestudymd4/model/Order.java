@@ -26,10 +26,17 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "id_customer", nullable = false)
     private Customer customer;
+    @Column(columnDefinition = "varchar(255) default 'Pending'")
     private String status;
     private String formattedTime;
     @PrePersist
     public void prePersist(){
         time = LocalDateTime.now();
+    }
+
+    public Order(BigDecimal total, Cart cart, Customer customer){
+        this.total = total;
+        this.cart = cart;
+        this.customer = customer;
     }
 }

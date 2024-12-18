@@ -24,4 +24,11 @@ public class OrderDetail {
     private Product product;
     private Long quantity;
     private BigDecimal price;
+
+    public OrderDetail(Order order, Product product, Long quantity, BigDecimal price) {
+        this.order = order;
+        this.product = product;
+        this.quantity = quantity;
+        this.price = price;
+    }
 }

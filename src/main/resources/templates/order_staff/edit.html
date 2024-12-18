@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/bd7b2915a7.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/header-form.css}">
+    <link rel="stylesheet" th:href="@{/css/addProduct.css}">
+    <title>Form sửa đơn hàng</title>
+</head>
+<body>
+<div class="container">
+    <div th:include="~{/fragments/headerForm :: headerForm}"></div>
+
+    <div class="form">
+        <div th:if="${errorMessage != null}" class="error-message">
+            <p th:text="${errorMessage}"></p>
+        </div>
+        <form th:action="@{/order_staff/edit}" th:object="${order}" method="post">
+            <table border="1">
+                <tr>
+                    <th colspan="2">SỬA THÔNG TIN ĐƠN HÀNG</th>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <label for="id">Mã đơn hàng</label>
+                    </td>
+                    <td><input type="text" name="id" id="id" th:field="*{id}" readonly></td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <label for="nameCustomer">Tên khách hàng</label>
+                    </td>
+                    <td><input type="text" name="nameCustomer" id="nameCustomer" th:value="${order.customer.name}" readonly></td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <label for="total">Tổng tiền</label>
+                    </td>
+                    <td><input type="text" name="total" id="total" th:value="${#numbers.formatDecimal(order.total.stripTrailingZeros().toPlainString(), 0, 0) + ' VNĐ'}" readonly></td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <label for="time">Ngày đặt</label>
+                    </td>
+                    <td><input type="text" name="time" id="time" th:value="${order.formattedTime}" readonly></td>
+                </tr>
+                <tr>
+                    <td class="info">
+                        <label for="status">Trạng thái</label>
+                    </td>
+                    <td>
+                        <select id="status" name="status">
+                            <option th:each="item : ${statusList}"
+                                    th:value="${item.name()}"
+                                    th:text="${item.displayName}"
+                                    th:selected="${item.name() == order.status}">
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="tdbtn">
+                        <button type="submit">Sửa thông tin</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>

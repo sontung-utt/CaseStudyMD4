@@ -5,6 +5,7 @@ import com.codegym.casestudymd4.repository.IOrderRepository;
 import com.codegym.casestudymd4.service.IOrderService;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @Service
@@ -31,5 +32,9 @@ public class OrderService implements IOrderService {
     @Override
     public void delete(Long id) {
         iOrderRepository.findById(id);
+    }
+
+    public BigDecimal getTotalByOrderId(Long orderId){
+        return iOrderRepository.getTotalByOrderId(orderId);
     }
 }

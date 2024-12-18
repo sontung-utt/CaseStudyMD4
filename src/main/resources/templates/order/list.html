@@ -43,8 +43,8 @@
       <tr th:each="item, loop : ${orderList}">
         <td th:text="${loop.index + 1}"></td>
         <td th:text="${item.id}"></td>
-        <td th:text="${item.time}"></td>
-        <td th:text="${item.total}"></td>
+        <td th:text="${item.formattedTime}"></td>
+        <td th:text="${#numbers.formatDecimal(item.total.stripTrailingZeros().toPlainString(), 0, 0) + ' VNĐ'}"></td>
         <td th:text="${item.status}"></td>
         <td class="tdbtn">
           <a th:href="@{/order/view(id=${item.id})}">

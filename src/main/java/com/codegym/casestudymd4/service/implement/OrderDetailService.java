@@ -5,6 +5,7 @@ import com.codegym.casestudymd4.repository.IOrderDetailRepository;
 import com.codegym.casestudymd4.service.IOrderDetailService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,5 +32,9 @@ public class OrderDetailService implements IOrderDetailService {
     @Override
     public void delete(Long id) {
         iOrderDetailRepository.deleteById(id);
+    }
+
+    public List<OrderDetail> getOrderDetailByOrderId(Long orderId){
+        return iOrderDetailRepository.getOrderDetailByOrderId(orderId);
     }
 }
