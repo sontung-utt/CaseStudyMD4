@@ -20,10 +20,10 @@
             <p th:text="${errorMessage}"></p>
         </div>
         <div class="form">
-            <form th:action="@{/staff_account/editRole}" th:object="${staffAccount}" method="post">
+            <form th:action="@{/staff_account/edit_account}" th:object="${staffAccount}" method="post">
                 <table border="1">
                     <tr>
-                        <th colspan="2">SỬA QUYỀN TÀI KHOẢN</th>
+                        <th colspan="2">SỬA THÔNG TIN CÁ NHÂN</th>
                     </tr>
                     <tr>
                         <td class="info">
@@ -37,29 +37,22 @@
                             <i class="fa-solid fa-circle-user"></i>
                             <label for="username">Tên tài khoản</label>
                         </td>
-                        <td><input type="text" name="username" id="username" th:field="*{username}" readonly></td>
+                        <td><input type="text" name="username" id="username" th:field="*{username}"></td>
                     </tr>
                     <tr>
                         <td class="info">
                             <i class="fa-solid fa-lock"></i>
                             <label for="password">Mật khẩu</label>
                         </td>
-                        <td><input type="text" name="password" id="password" th:field="*{password}" readonly></td>
+                        <td><input type="text" name="password" id="password" th:field="*{password}"></td>
                     </tr>
                     <tr>
                         <td class="info">
                             <i class="fa-solid fa-house-circle-check"></i>
                             <label for="idRole">Chức năng</label>
                         </td>
-                        <td>
-                            <select id="idRole" name="idRole" th:field="*{role.id}">
-                                <option th:each="item : ${roleList}"
-                                        th:value="${item.id}"
-                                        th:selected="${item.id == staffAccount.role?.id}"
-                                        th:text="${item.displayName}">
-                                </option>
-                            </select>
-                        </td>
+                        <td><input type="text" name="idRole" id="idRole" th:field="*{role.name}" readonly></td>
+
                     </tr>
                     <tr>
                         <td colspan="2" class="tdbtn">

@@ -9,7 +9,7 @@
           rel="stylesheet">
     <script src="https://kit.fontawesome.com/bd7b2915a7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" th:href="@{/css/leftFrame.css}">
-    <title>Document</title>
+    <title>Quản lý</title>
 </head>
 <body>
 <div th:fragment="leftFrame">
@@ -21,7 +21,7 @@
                 </div>
                 <div class="user">
                     <i class="fa-solid fa-user-group"></i>
-                    <p th:text="${roleName}"></p>
+                    <p>Nhân viên</p>
                 </div>
             </div>
             <div class="manage">
@@ -50,36 +50,57 @@
                         </div>
                     </div>
                     <div class="list">
+                        <!-- Quản lý sản phẩm (Chỉ ADMIN hoặc SALE) -->
                         <div class="list-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_SALE')">
                             <a th:href="@{/products/list}"><i class="fa-solid fa-boxes-packing"></i>Quản lý sản phẩm</a>
                         </div>
+
+                        <!-- Quản lý loại sản phẩm (Chỉ ADMIN) -->
                         <div class="list-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
                             <a th:href="@{/categories/list}"><i class="fa-solid fa-box-open"></i>Quản lý loại sản phẩm</a>
                         </div>
+
+                        <!-- Quản lý thương hiệu (Chỉ ADMIN) -->
                         <div class="list-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
                             <a th:href="@{/brands/list}"><i class="fa-solid fa-rectangle-list"></i>Quản lý thương hiệu</a>
                         </div>
-                        <div class="list-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_SALE')">
+
+                        <!-- Quản lý nhóm sản phẩm (Chỉ ADMIN) -->
+                        <div class="list-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
                             <a th:href="@{/brand_category/list}"><i class="fa-solid fa-layer-group"></i>Quản lý nhóm sản phẩm</a>
                         </div>
-                        <div class="list-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_HR', 'ROLE_DBA')">
+
+                        <!-- Quản lý tài khoản nhân sự (Chỉ ADMIN hoặc HR) -->
+                        <div class="list-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_HR')">
                             <a th:href="@{/staff_account/list}"><i class="fa-solid fa-user-group"></i>Quản lý tài khoản nhân sự</a>
                         </div>
-                        <div class="list-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_DBA')">
+
+                        <!-- Quản lý tài khoản khách hàng (Chỉ ADMIN) -->
+                        <div class="list-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
                             <a th:href="@{/user/list}"><i class="fa-solid fa-circle-user"></i>Quản lý tài khoản khách hàng</a>
                         </div>
+
+                        <!-- Quản lý nhân sự (Chỉ ADMIN hoặc HR) -->
                         <div class="list-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_HR')">
                             <a th:href="@{/staffs/list}"><i class="fa-solid fa-user-tie"></i>Quản lý nhân sự</a>
                         </div>
+
+                        <!-- Quản lý khách hàng (Chỉ ADMIN) -->
                         <div class="list-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
                             <a th:href="@{/home/list}"><i class="fa-solid fa-users"></i>Quản lý khách hàng</a>
                         </div>
-                        <div class="list-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_HR')">
+
+                        <!-- Quản lý phòng ban (Chỉ ADMIN hoặc DBA) -->
+                        <div class="list-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_DBA')">
                             <a th:href="@{/departments/list}"><i class="fa-solid fa-building-user"></i>Quản lý phòng ban</a>
                         </div>
+
+                        <!-- Quản lý chức năng (Chỉ ADMIN hoặc DBA) -->
                         <div class="list-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_DBA')">
                             <a th:href="@{/role/list}"><i class="fa-solid fa-user-shield"></i>Quản lý chức năng</a>
                         </div>
+
+                        <!-- Quản lý đơn hàng (Chỉ ADMIN hoặc SALE) -->
                         <div class="list-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_SALE')">
                             <a th:href="@{/order_staff/list}"><i class="fa-solid fa-cart-shopping"></i>Quản lý đơn hàng</a>
                         </div>

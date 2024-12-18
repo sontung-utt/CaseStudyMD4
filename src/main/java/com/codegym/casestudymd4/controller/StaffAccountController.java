@@ -3,10 +3,14 @@ package com.codegym.casestudymd4.controller;
 import com.codegym.casestudymd4.model.CustomerAccount;
 import com.codegym.casestudymd4.model.Role;
 import com.codegym.casestudymd4.model.StaffAccount;
+import com.codegym.casestudymd4.model.StaffAccountPrinciple;
 import com.codegym.casestudymd4.service.IRoleService;
 import com.codegym.casestudymd4.service.IStaffAccountService;
 import com.codegym.casestudymd4.service.implement.StaffAccountService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,17 +45,10 @@ public class StaffAccountController {
     }
 
     @PostMapping("/login")
-    public String loginCustomer(@ModelAttribute CustomerAccount customerAccount,
-                                @RequestParam("username") String username,
-                                @RequestParam("password") String password,
-                                Model model){
-        model.addAttribute("user", customerAccount);
-        if (staffAccountService.checkUser(username, password)){
-            return "redirect:/products/list";
-        } else {
-            model.addAttribute("errorMessage", "Tên đăng nhập hoặc mật khẩu không đúng!");
-            return "staff_account/login";
-        }
+    public String loginStaff(HttpServletRequest request, @AuthenticationPrincipal StaffAccountPrinciple currentUser) {
+        HttpSession session = request.getSession();
+        session.setAttribute("idLoginStaff", currentUser.getId());
+        return "redirect:/home";
     }
 
     @GetMapping("/register")
@@ -119,6 +116,15 @@ public class StaffAccountController {
         staffAccount.setRole(roleOptional.get());
         iStaffAccountService.save(staffAccount);
         return "redirect:/staff_account/list";
+    }
+
+    @GetMapping("/edit_account")
+    public ModelAndView showFormEditAccount(@RequestParam Long id){
+        Optional<StaffAccount> optionalStaffAccount = iStaffAccountService.findById(id);
+        StaffAccount staffAccount = optionalStaffAccount.get();
+        ModelAndView modelAndView = new ModelAndView("staff_account/edit_account");
+        modelAndView.addObject("staffAccount", staffAccount);
+        return modelAndView;
     }
 
     @GetMapping("/edit")

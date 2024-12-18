@@ -28,4 +28,7 @@ public interface IStaffAccountRepository extends JpaRepository<StaffAccount,Long
 
     @Query("SELECT COUNT(b) FROM StaffAccount b where b.username = :username and b.password = :password")
     Long checkUser (@Param("username") String username, @Param("password") String password);
+
+    @Query("SELECT a.username FROM StaffAccount a where a.id = :id")
+    String getUsernameById(@Param("id") Long id);
 }

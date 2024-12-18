@@ -15,4 +15,12 @@ public class LogoutController {
         }
         return "redirect:/login";
     }
+
+    @GetMapping("/staff")
+    public String logoutStaff(HttpSession session){
+        if (session!=null){
+            session.invalidate();
+        }
+        return "redirect:/staff_account/login";
+    }
 }

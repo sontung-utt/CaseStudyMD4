@@ -14,13 +14,13 @@
 <body>
 <div th:fragment="topFrame">
     <div class="top-frame">
-        <a th:href="@{/account}">
+        <a th:href="@{/staff_account/edit_account(id=${id})}">
             <div class="account">
                 <i class="fa-solid fa-user"></i>
                 <p th:text="${username}"></p>
             </div>
         </a>
-        <a th:href="@{/logout}" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất không?');">
+        <a th:href="@{/logout/staff}" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất không?');">
             <div class="logout">
                 <i class="fa-solid fa-right-from-bracket"></i>
                 <p>Đăng xuất</p>
