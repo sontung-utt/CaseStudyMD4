@@ -13,58 +13,36 @@ import java.util.Objects;
 
 public class StaffAccountPrinciple implements UserDetails {
 
-    @Serial
-    private static final long serialVersionUID = 1L;
+    private final StaffAccount staffAccount;
 
-    @Getter
-    private final Long id;
-
-    private final String username;
-
-    private final String password;
-    @Getter
-    private final Collection<? extends GrantedAuthority> roles;
-
-    public StaffAccountPrinciple(Long id, String username, String password, Collection<? extends GrantedAuthority> roles) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.roles = roles;
+    public StaffAccountPrinciple(StaffAccount staffAccount) {
+        this.staffAccount = staffAccount;
     }
 
-    public static StaffAccountPrinciple build(StaffAccount staffAccount){
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        if (staffAccount.getRole()!=null){
-            authorities.add(new SimpleGrantedAuthority(staffAccount.getRole().getName()));
-        }
-
-        return new StaffAccountPrinciple(
-                staffAccount.getId(),
-                staffAccount.getUsername(),
-                staffAccount.getPassword(),
-                authorities
-        );
+    public Long getId() {
+        return staffAccount.getId();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles;
+        return List.of(new SimpleGrantedAuthority(staffAccount.getRole().getName()));
     }
 
     @Override
     public String getPassword() {
-        return password;
+        return staffAccount.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return this.username;
+        return staffAccount.getUsername();
     }
 
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
+
     @Override
     public boolean isAccountNonLocked() {
         return true;
@@ -78,18 +56,6 @@ public class StaffAccountPrinciple implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        StaffAccountPrinciple user = (StaffAccountPrinciple) o;
-        return Objects.equals(id, user.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
     }
 
 }

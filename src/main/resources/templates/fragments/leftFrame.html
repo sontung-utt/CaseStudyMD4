@@ -68,10 +68,10 @@
                         <div class="list-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_DBA')">
                             <a th:href="@{/user/list}"><i class="fa-solid fa-circle-user"></i>Quản lý tài khoản khách hàng</a>
                         </div>
-                        <div class="list-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_HR')">
+                        <div class="list-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_HR', 'ROLE_DBA')">
                             <a th:href="@{/staffs/list}"><i class="fa-solid fa-user-tie"></i>Quản lý nhân sự</a>
                         </div>
-                        <div class="list-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
+                        <div class="list-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_DBA')">
                             <a th:href="@{/home/list}"><i class="fa-solid fa-users"></i>Quản lý khách hàng</a>
                         </div>
                         <div class="list-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_HR')">

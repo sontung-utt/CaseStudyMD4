@@ -69,7 +69,11 @@ public class StaffAccountService implements IStaffAccountService, UserDetailsSer
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return StaffAccountPrinciple.build(iStaffAccountRepository.findByUsername(username));
+        StaffAccount staffAccount = iStaffAccountRepository.findByUsername(username);
+        if (staffAccount == null) {
+            throw new UsernameNotFoundException("Tài khoản không tồn tại: " + username);
+        }
+        return new StaffAccountPrinciple(staffAccount);
     }
 
     public String getUsernameById(Long id) {

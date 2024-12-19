@@ -45,10 +45,19 @@ public class StaffAccountController {
     }
 
     @PostMapping("/login")
-    public String loginStaff(HttpServletRequest request, @AuthenticationPrincipal StaffAccountPrinciple currentUser) {
-        HttpSession session = request.getSession();
-        session.setAttribute("idLoginStaff", currentUser.getId());
-        return "redirect:/home";
+    public String loginStaff(@RequestParam("username") String username,
+                             @RequestParam("password") String password,
+                             HttpSession session,
+                             Model model) {
+        Long idLoginStaff = staffAccountService.getIdByUsername(username);
+        if (staffAccountService.checkUser(username, password)) {
+            session.setAttribute("username", username);
+            session.setAttribute("idLoginStaff", idLoginStaff);
+            return "redirect:/products/list";
+        } else {
+            model.addAttribute("errorMessage", "Tên đăng nhập hoặc mật khẩu không đúng!");
+            return "staff_account/login";
+        }
     }
 
     @GetMapping("/register")
@@ -125,6 +134,25 @@ public class StaffAccountController {
         ModelAndView modelAndView = new ModelAndView("staff_account/edit_account");
         modelAndView.addObject("staffAccount", staffAccount);
         return modelAndView;
+    }
+
+    @PostMapping("/edit_account")
+    public String editAccount(@RequestParam Long id,
+                              @ModelAttribute StaffAccount staffAccount,
+                              @RequestParam String username,
+                              RedirectAttributes redirectAttributes){
+        Optional<StaffAccount> optionalStaffAccount = iStaffAccountService.findById(id);
+        StaffAccount existStaffAccount = optionalStaffAccount.get();
+        if (!existStaffAccount.getUsername().equals(username)){
+            if (staffAccountService.existStaffAccount(username)){
+                redirectAttributes.addFlashAttribute("errorMessage", "Tên tài khoản đã tồn tại!");
+                return "redirect:/staff_account/edit_account?id=" + id;
+            }
+        }
+        staffAccount.setCreated_at(existStaffAccount.getCreated_at());
+        staffAccount.setRole(existStaffAccount.getRole());
+        iStaffAccountService.save(staffAccount);
+        return "redirect:/go-back";
     }
 
     @GetMapping("/edit")

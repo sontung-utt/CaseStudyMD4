@@ -42,6 +42,7 @@
     </div>
     <div class="form">
         <div th:if="${errorMessage}" style="color: red;" th:text="${errorMessage}"></div>
+        <div th:if="${param.error}" style="color: red;">Không tìm thấy username!</div>
         <form th:action="@{/staff_account/login}" th:object="${user}" method="post">
             <table border="1">
                 <tr>

@@ -61,10 +61,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain staffFilterChain(HttpSecurity http) throws Exception {
         http
-                // Trang login cho nhân viên
+                .authenticationProvider(staffAuthenticationProvider())
                 .securityMatcher("/staff_account/**","/products/**", "/order_staff/**", "/brand_category/**", "/brands/**", "/categories/**", "/role/**", "/departments/**", "/home/list", "/user/list", "/staffs/**")
                 .formLogin(form -> form
                         .loginPage("/staff_account/login")
+                        .failureUrl("/staff_account/login")
                         .loginProcessingUrl("/staff_account/login")
                         .usernameParameter("username")
                         .passwordParameter("password")
@@ -82,6 +83,13 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable);
 
         return http.build();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
+        return http.getSharedObject(AuthenticationManagerBuilder.class)
+                .authenticationProvider(staffAuthenticationProvider())
+                .build();
     }
 
 }

@@ -1,5 +1,6 @@
 package com.codegym.casestudymd4.controller;
 
+import com.codegym.casestudymd4.configuration.SecurityUtils;
 import com.codegym.casestudymd4.model.StaffAccount;
 import com.codegym.casestudymd4.model.StaffAccountPrinciple;
 import com.codegym.casestudymd4.service.implement.StaffAccountService;
@@ -25,11 +26,14 @@ public class FragmentController {
     }
 
     @GetMapping("/top_frame")
-    public String topFrame(Model model, Authentication authentication) {
-        String username = authentication.getName();
+    public String topFrame(Model model) {
+//        if (userDetails == null) {
+//            return "redirect:/staff_account/login";
+//        }
+        String username = SecurityUtils.getLoggedInUsername();
         Long id = staffAccountService.getIdByUsername(username);
         model.addAttribute("username", username);
-        model.addAttribute("id",id);
+        model.addAttribute("id", id);
         return "fragments/topFrame";
     }
 
@@ -39,7 +43,7 @@ public class FragmentController {
             return "redirect:/staff_account/login";
         }
 
-        model.addAttribute("roleName", userDetails.getRoles());
+        model.addAttribute("roleName", userDetails.getAuthorities());
         return "fragments/leftFrame";
     }
 }
